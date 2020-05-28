@@ -24,13 +24,13 @@ public class SearchActivity extends AppCompatActivity {
 //        });
 
         Button text_searchbtn= findViewById(R.id.text_searchbtn);
-//        text_searchbtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent text_intent = new Intent (getApplicationContext(), Search_Text.class); //일단 바로 검색결과 띄음
-//                startActivity(text_intent);
-//            }
-//        });
+        text_searchbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent text_intent = new Intent (getApplicationContext(), TextresultActivity.class); //일단 바로 검색결과 띄음
+                startActivity(text_intent);
+            }
+        });
 
     }
 }

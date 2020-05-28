@@ -69,14 +69,14 @@ public class TextresultActivity extends AppCompatActivity {
     }
 
     //XmlPullParser를 이용하여 Naver 에서 제공하는 OpenAPI XML 파일 파싱하기(parsing)
+
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     String getXmlData() throws UnsupportedEncodingException {
         StringBuffer buffer=new StringBuffer();
         String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
-        String med_name = URLEncoder.encode(str, StandardCharsets.UTF_8.name());//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding..
-        String query = "%EC%A0%84%EB%A0%A5%EB%A1%9C";
+        String med_name = URLEncoder.encode(str, java.nio.charset.StandardCharsets.UTF_8.toString());//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding..
 
-        String queryUrl="http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?"+"ITEM_NAME="+med_name+"&pageNo=1&numOfRows=1000&ServiceKey="+key;
+        String queryUrl="http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&pageNo=3&numOfRows=10&ServiceKey="+key;
 
         try{
             URL url= new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성
