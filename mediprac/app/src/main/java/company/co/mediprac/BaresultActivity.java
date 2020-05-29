@@ -25,23 +25,24 @@ public class BaresultActivity extends AppCompatActivity {
         super.onResume();
     }
 
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-//        super.onActivityResult(requestCode, resultCode, intent);
-//        Log.d("onActivityResult", "onActivityResult: .");
-//        if (resultCode == Activity.RESULT_OK) {
-//            IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-//            String re = scanResult.getContents();
-//            Log.d("onActivityResult", "onActivityResult: ." + re);
-//            // 여기서 bookinfo로 가게하기!
-//
-//            Intent tobookinfo  = new Intent(this, BookInfoActivity.class);
-//            tobookinfo.putExtra("isbn", re);
-//            startActivity(tobookinfo);
-//            finish();
-//        }else {
-//            finish();
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        Log.d("onActivityResult", "onActivityResult: .");
+        if (resultCode == Activity.RESULT_OK) {
+            IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+            String re = scanResult.getContents();
+            //String message = re;
+            Log.d("onActivityResult", "onActivityResult: ." + re);
+
+            // 여기서 약 정보 리스트로 가게하기
+            //Intent tomedinfo  = new Intent(this, MedInfoActivity.class);
+            //tomedinfo.putExtra("PRDLST_STDR_CODE", re);
+            //startActivity(tomedinfo);
+            finish();
+        }else {
+            finish();
+        }
+    }
 
 }
