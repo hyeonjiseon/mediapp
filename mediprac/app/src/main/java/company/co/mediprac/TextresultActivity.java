@@ -76,7 +76,7 @@ public class TextresultActivity extends AppCompatActivity {
         String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
         String med_name = URLEncoder.encode(str, java.nio.charset.StandardCharsets.UTF_8.toString());//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding..
 
-        String queryUrl="http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&pageNo=3&numOfRows=10&ServiceKey="+key;
+        String queryUrl="http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&pageNo=1&numOfRows=10&ServiceKey="+key+"&ITEM_NAME="+med_name;
 
         try{
             URL url= new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성
@@ -98,12 +98,11 @@ public class TextresultActivity extends AppCompatActivity {
                         break;
 
                     case XmlPullParser.START_TAG:
-                        tag= xpp.getName();//테그 이름 얻어오기
+                        tag= xpp.getName();//태그 이름 얻어오기
 
                         if(tag.equals("item"));// 첫번째 검색결과
-                        //ITEM_SEQ
                         else if(tag.equals("ITEM_NAME")){
-                            buffer.append("제품명 : ");
+                            buffer.append("품목명 : ");
                             xpp.next();
                             buffer.append(xpp.getText());//title 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n"); //줄바꿈 문자 추가
@@ -114,12 +113,12 @@ public class TextresultActivity extends AppCompatActivity {
                             buffer.append(xpp.getText());//category 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");//줄바꿈 문자 추가
                         }
-//                        else if(tag.equals("ITEM_PERMIT_DATE")){
-//                            buffer.append("허가 일자 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n");//줄바꿈 문자 추가
-//                        }
+                        else if(tag.equals("ITEM_PERMIT_DATE")){
+                            buffer.append("품목 허가 일자 :");
+                            xpp.next();
+                            buffer.append(xpp.getText());//description 요소의 TEXT 읽어와서 문자열버퍼에 추가
+                            buffer.append("\n");//줄바꿈 문자 추가
+                        }
                         else if(tag.equals("INDUTY")){
                             buffer.append("업종 : ");
                             xpp.next();
@@ -144,67 +143,6 @@ public class TextresultActivity extends AppCompatActivity {
                             buffer.append(xpp.getText());//telephone 요소의 TEXT 읽어와서 문자열버퍼에 추가
                             buffer.append("\n");//줄바꿈 문자 추가
                         }
-                        //ITEM INGR CNT, PERMIT KIND CODE, CANCEL DATE, CANCEL NAME
-//                        else if(tag.equals("CHART")){
-//                            buffer.append("제품 모양 정보 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//address 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n");//줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("BAR_CODE")){
-//                            buffer.append("바코드번호 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapx 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("MATERIAL_NAME")){
-//                            buffer.append("상세 정보 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("EE_DOC_ID")){
-//                            buffer.append("EE DOC ID :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("UD_DOC_ID")){
-//                            buffer.append("UD DOC ID:");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("NB_DOC_ID")){
-//                            buffer.append("NB DOC ID :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("STORAGE_METHOD")){
-//                            buffer.append("보관 방법 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("VALID_TERM")){
-//                            buffer.append("유통기한 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("PACK_UNIT")){
-//                            buffer.append("포장 단위 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
-//                        else if(tag.equals("PERMIT_KIND_NAME")){
-//                            buffer.append("허가 종류 :");
-//                            xpp.next();
-//                            buffer.append(xpp.getText());//mapy 요소의 TEXT 읽어와서 문자열버퍼에 추가
-//                            buffer.append("\n"); //줄바꿈 문자 추가
-//                        }
                         break;
 
                     case XmlPullParser.TEXT:
