@@ -2,6 +2,8 @@ package company.co.mediprac;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -22,23 +24,41 @@ import java.nio.charset.StandardCharsets;
 public class TextresultActivity extends AppCompatActivity {
 
     EditText edit;
-    TextView text;
+    //TextView text;
     XmlPullParser xpp;
 
     String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
     String data;
+
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
 
         edit= (EditText)findViewById(R.id.edit);
-        text= (TextView)findViewById(R.id.result);
+        //text= (TextView)findViewById(R.id.result);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+
+        // use a linear layout manager
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        // specify an adapter (see also next example)
+        mAdapter = new RecyclerviewAdapter(myDataset);
+        recyclerView.setAdapter(mAdapter);
 
     }
 
     //Button을 클릭했을 때 자동으로 호출되는 callback method....
     public void mOnClick(View v){
+
         switch (v.getId()){
             case R.id.button:
                 //Android 4.0 이상 부터는 네트워크를 이용할 때 반드시 Thread 사용해야 함
@@ -75,6 +95,7 @@ public class TextresultActivity extends AppCompatActivity {
         StringBuffer buffer=new StringBuffer();
         String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
         String med_name = URLEncoder.encode(str, java.nio.charset.StandardCharsets.UTF_8.toString());//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding..
+        //med_name을 넘겨줘야 할 듯
 
         String queryUrl="http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&pageNo=1&numOfRows=10&ServiceKey="+key+"&ITEM_NAME="+med_name;
 
