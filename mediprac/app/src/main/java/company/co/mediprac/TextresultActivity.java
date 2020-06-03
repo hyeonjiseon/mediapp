@@ -19,8 +19,8 @@ import java.util.ArrayList;
 public class TextresultActivity extends AppCompatActivity {
 
     public String requestUrl;
-    ArrayList<medlist> list = null;
-    medlist bus = null;
+    ArrayList<Item> list = null;
+    Item bus = null;
     RecyclerView recyclerView;
 
     EditText edit;
@@ -82,7 +82,7 @@ public class TextresultActivity extends AppCompatActivity {
                 while(evenType != XmlPullParser.END_DOCUMENT){
                     switch(evenType){
                         case XmlPullParser.START_DOCUMENT:
-                            list = new ArrayList<medlist>();
+                            list = new ArrayList<Item>();
                             break;
                         case XmlPullParser.END_DOCUMENT:
                             break;
@@ -93,7 +93,7 @@ public class TextresultActivity extends AppCompatActivity {
                                 break;
                                 case XmlPullParser.START_TAG:
                                     if(parser.getName().equals("item")){
-                                        bus = new medlist();
+                                        bus = new Item();
                                     }
                                     if(parser.getName().equals("ITEM_NAME"))
                                         b_ITEM_NAME = true;

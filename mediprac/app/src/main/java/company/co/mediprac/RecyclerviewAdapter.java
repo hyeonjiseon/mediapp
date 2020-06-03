@@ -14,11 +14,11 @@ import java.util.ArrayList;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> {
 
-    private ArrayList<medlist> mList;
+    private ArrayList<Item> mList;
     private LayoutInflater mInflate;
     private Context mContext;
 
-    public RecyclerviewAdapter(Context context, ArrayList<medlist> items){
+    public RecyclerviewAdapter(Context context, ArrayList<Item> items){
         this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
@@ -27,7 +27,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View view = mInflate.inflate(R.layout.recyclerview_medlist, parent, false);
+        View view = mInflate.inflate(R.layout.item, parent, false);
         MyViewHolder viewHolder = new MyViewHolder(view);
         return viewHolder;
     }
@@ -80,7 +80,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //        // create a new view
 //
 //        TextView text = (TextView)LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.recyclerview_medlist, parent, false);
+//                .inflate(R.layout.item, parent, false);
 //
 //        MyViewHolder vh = new MyViewHolder(text);
 //        return vh;
@@ -98,17 +98,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
 //}
 
+
 //package com.js.xmlpullparser_example;
 
-class medlist {
-
-    String ITEM_NAME;
-
-    public String getITEM_NAME() {
-        return ITEM_NAME;
-    }
-
-    public void setITEM_NAME(String ITEM_NAME) {
-        this.ITEM_NAME = ITEM_NAME;
-    }
-}
