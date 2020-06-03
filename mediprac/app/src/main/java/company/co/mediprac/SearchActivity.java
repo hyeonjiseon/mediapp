@@ -27,7 +27,7 @@ public class SearchActivity extends AppCompatActivity {
         text_searchbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent text_intent = new Intent (getApplicationContext(), TextresultActivity.class); //일단 바로 검색결과 띄음
+                Intent text_intent = new Intent (getApplicationContext(), TextinActivity.class); //일단 바로 검색결과 띄음
                 startActivity(text_intent);
             }
         });
