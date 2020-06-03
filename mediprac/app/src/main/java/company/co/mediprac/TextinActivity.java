@@ -1,7 +1,10 @@
 package company.co.mediprac;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,17 @@ public class TextinActivity extends AppCompatActivity {
 
         edit= (EditText)findViewById(R.id.edit);
         //text= (TextView)findViewById(R.id.result);
+
+        Button txtin_btn = findViewById(R.id.textin_btn);
+        txtin_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_txtin = new Intent(getApplicationContext(), TextresultActivity.class);
+                intent_txtin.putExtra("name", edit.getText().toString());//edit에 입력한 값을 TextresultActivity로 넘김
+                startActivity(intent_txtin);
+                finish();
+            }
+        });
 
     }
 

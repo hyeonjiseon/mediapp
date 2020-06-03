@@ -44,7 +44,7 @@
             android:hint="약 이름을 입력해 주세요" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/textin_btn"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:foregroundGravity="center"

@@ -1,11 +1,13 @@
 package company.co.mediprac;
 
-import androidx.appcompat.app.AppCompatActivity;
-//import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+//import android.app.Activity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button_search = findViewById(R.id.button);
+        Button button_search = findViewById(R.id.search_button);
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
