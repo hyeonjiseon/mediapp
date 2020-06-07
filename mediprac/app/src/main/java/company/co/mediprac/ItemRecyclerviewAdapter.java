@@ -12,30 +12,45 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> {
+import co.moonmonkeylabs.realmsearchview.RealmSearchAdapter;
+import io.realm.Realm;
+import io.realm.RealmViewHolder;
+
+public class ItemRecyclerviewAdapter extends RealmSearchAdapter<Item, ItemRecyclerviewAdapter.ViewHolder> {
+    //RealmSearchAdapter는 검색 뷰에서 Realm 데이터를 찾거나 필터링 할 수 있는 베이스 어댑터이다.
+    //RealmSearchAdapter는 컨텍스트와 Realm, filterColumn 이름 등 필터링할 객체들을 받는다.
 
     private ArrayList<Item> mList;
     private LayoutInflater mInflate;
     private Context mContext;
 
-    public RecyclerviewAdapter(Context context, ArrayList<Item> items){
-        this.mList = items;
-        this.mInflate = LayoutInflater.from(context);
-        this.mContext = context;
+    public ItemRecyclerviewAdapter(Context context, Realm realm, String filterColumnName) {
+        super(context, realm, filterColumnName);
     }
 
-    @NonNull
-    @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View view = mInflate.inflate(R.layout.item, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
-        return viewHolder;
+    public class ViewHolder extends RealmViewHolder {
+        private final ItemItemView itemItemView;
+
+        public ViewHolder(ItemItemView itemItemView){
+            super(itemItemView);
+            this.itemItemView = itemItemView;
+        }
     }
 
     @Override
-    public void onBindViewHolder (@NonNull MyViewHolder holder, int position){
-        //binding
-        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
+    public ViewHolder onCreateRealmViewHolder(ViewGroup viewGroup, int viewType){ //뷰를 포함한 뷰홀더를 만든다.
+        ViewHolder vh = new ViewHolder(new ItemItemView(viewGroup.getContext()));
+        return vh;
+    }
+
+    @Override
+    public void onBindRealmViewHolder (ViewHolder viewHolder, int position){
+        final Item item = realmResults.get(position);
+        viewHolder.itemItemView.bind(item);
+    }
+
+    public ViewHolder convertViewHolder(RealmViewHolder viewHolder) { // 아이템 뷰를 저장하는 뷰홀더 클래스.
+        return ViewHolder.class.cast(viewHolder);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
@@ -43,22 +58,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public int getItemCount() { //전체 아이템 갯수 리턴.
         return mList.size();
     }
-
-    public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
-        // each data item is just a string in this case
-        //public TextView textView;
-        public TextView ITEM_NAME;
-
-        public MyViewHolder(View itemView){
-            super(itemView);
-            ITEM_NAME = itemView.findViewById(R.id.item_name);
-        }
-//        public MyViewHolder(TextView v) {
-//            super(v);
-//            textView = v.findViewById(R.id.result);
-//        }
-    }
-
 }
 
     //private String[] mDataset;

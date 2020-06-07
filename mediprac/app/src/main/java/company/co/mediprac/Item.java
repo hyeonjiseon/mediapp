@@ -1,8 +1,12 @@
 package company.co.mediprac;
 
-public class Item {
+import io.realm.RealmObject;
 
-    String ITEM_NAME;
+public class Item extends RealmObject {
+
+    private String ITEM_NAME;
+
+    public Item(){}
 
     public String getITEM_NAME() {
         return ITEM_NAME;
