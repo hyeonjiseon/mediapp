@@ -69,6 +69,7 @@ public class TextresultActivity extends AppCompatActivity {
             requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey="+key;
             try{
                 boolean b_ITEM_NAME = false;
+                boolean b_ENTP_NAME = false;
 
                 URL url = new URL(requestUrl);
                 InputStream is = url.openStream();
@@ -86,24 +87,27 @@ public class TextresultActivity extends AppCompatActivity {
                             break;
                         case XmlPullParser.END_DOCUMENT:
                             break;
-                            case XmlPullParser.END_TAG:
-                                if(parser.getName().equals("item") && bus != null){
-                                    list.add(bus);
-                                }
-                                break;
-                                case XmlPullParser.START_TAG:
-                                    if(parser.getName().equals("item")){
-                                        bus = new Item();
-                                    }
-                                    if(parser.getName().equals("ITEM_NAME"))
-                                        b_ITEM_NAME = true;
-                                    break;
-                                    case XmlPullParser.TEXT:
-                                        if(b_ITEM_NAME){
-                                            bus.setITEM_NAME(parser.getText());
-                                            b_ITEM_NAME = false;
-                                        }
-                                        break;
+                        case XmlPullParser.END_TAG:
+                            if(parser.getName().equals("item") && bus != null){
+                                list.add(bus);
+                            }
+                            break;
+                        case XmlPullParser.START_TAG:
+                            if(parser.getName().equals("item")){
+                                bus = new Item();
+                            }
+                            if(parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
+                            if(parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
+                            break;
+                        case XmlPullParser.TEXT:
+                            if(b_ITEM_NAME){
+                               bus.setITEM_NAME(parser.getText());
+                               b_ITEM_NAME = false;
+                            } else if(b_ENTP_NAME){
+                                bus.setENTP_NAME(parser.getText());
+                                b_ENTP_NAME = false;
+                            }
+                            break;
                     }
                     evenType = parser.next();
                 }
@@ -112,6 +116,7 @@ public class TextresultActivity extends AppCompatActivity {
             }
             return null;
         }
+        
         @Override
         protected void onPostExecute(String s){
             super.onPostExecute(s);
