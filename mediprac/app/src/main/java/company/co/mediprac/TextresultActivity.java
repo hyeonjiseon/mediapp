@@ -3,7 +3,6 @@ package company.co.mediprac;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -13,9 +12,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.URL;
-import java.net.URLEncoder;
 
 
 public class TextresultActivity extends Activity {
@@ -160,14 +157,14 @@ public class TextresultActivity extends Activity {
         String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
         String name = null;//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding..
         //name = URLEncoder.encode(str, "UTF-8");
-        try {
-            name = URLEncoder.encode(str, "UTF-8");
-        } catch (UnsupportedEncodingException e) { //encode가 안 돼서 try로 못 가고 catch로 가서 파싱 자체가 안됨
-            Log.e("Your app", "UnsupportedEncodingException");
-        }
+//        try {
+//            name = URLEncoder.encode(str, "UTF-8");
+//        } catch (UnsupportedEncodingException e) { //encode가 안 돼서 try로 못 가고 catch로 가서 파싱 자체가 안됨
+//            Log.e("Your app", "UnsupportedEncodingException");
+//        }
         //med_name을 넘겨줘야 할 듯
 
-        String queryUrl="http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?"+"ITEM_NAME="+name+"&pageNo=1&numOfRows=5&ServiceKey="+key;
+        String queryUrl="http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?"+"PRDLST_STDR_CODE="+name+"&pageNo=1&numOfRows=5&ServiceKey="+key;
 
         try{
             URL url= new URL(queryUrl);//문자열로 된 요청 url을 URL 객체로 생성
