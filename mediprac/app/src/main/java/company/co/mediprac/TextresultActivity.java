@@ -154,8 +154,9 @@ public class TextresultActivity extends Activity {
     //@RequiresApi(api = Build.VERSION_CODES.KITKAT) java.nio.charset.StandardCharsets.UTF_8.toString()
     String getXmlData() {
         StringBuffer buffer = new StringBuffer();
-        String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
-        String name = null;//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding..
+        //String str= edit.getText().toString();//EditText에 작성된 Text얻어오기
+        //String name = null;//한글의 경우 인식이 안되기에 utf-8 방식으로 encoding..
+        int name = Integer.parseInt(edit.getText().toString());
         //name = URLEncoder.encode(str, "UTF-8");
 //        try {
 //            name = URLEncoder.encode(str, "UTF-8");
