@@ -1,34 +1,27 @@
 package company.co.mediprac;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class TextresultActivity extends AppCompatActivity {
 
-    //private PotionListViewAdapter adapter;
     private RecyclerviewAdapter adapter;
     LinearLayoutManager mLayoutManager;
 
     public String requestUrl;
-    //ArrayList<Recent> list = null;
+    ArrayList<Recent> list = null;
     Recent bus = null;
     RecyclerView recyclerView;
 
@@ -46,9 +39,10 @@ public class TextresultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
-        init();
+        //init();
 
         List<Recent> potionList = new ArrayList<Recent>();
+
         for(int i=0;i<30;i++){
             Recent rc = new Recent(i+"","");
             potionList.add(rc);
@@ -64,12 +58,7 @@ public class TextresultActivity extends AppCompatActivity {
             potionList.add(rc);
         }
 
-
-
-//        CustomList adapter = new CustomList(TextresultActivity.this);
-//        list=(ListView)findViewById(R.layout.activity_textresult);
-//        list.setAdapter(adapter);
-
+        
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview_medlist);
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -78,6 +67,10 @@ public class TextresultActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
+
+        //final DisplayContext displayContext = new DisplayContext();
+
+        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
         // use a linear layout manager
 //        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -91,8 +84,13 @@ public class TextresultActivity extends AppCompatActivity {
         edit = (EditText)findViewById(R.id.edit);
         //text= (TextView)findViewById(R.id.result);
 
-        adapter = new RecyclerviewAdapter(this, potionList);
+        adapter = new RecyclerviewAdapter(this, list);
         recyclerView.setAdapter(adapter);
+
+        String text = edit.toString();
+
+
+
 
         // specify an adapter (see also next example)
         //mAdapter = new RecyclerviewAdapter(myDataset);
@@ -101,21 +99,34 @@ public class TextresultActivity extends AppCompatActivity {
         //검색창
         edit.addTextChangedListener(new TextWatcher() {
             @Override
-            public void aftrTextChanged(Editablearg0){
+            public void afterTextChanged(Editable s){
                 String text = edit.getText().toString().toLowerCase(Locale.getDefault());
                 adapter.filter(text);
             }
 
             @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3){
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
                 //TODO Auto-generated method stub
             }
 
             @Override
-            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3){
+            public void onTextChanged(CharSequence s, int start, int count, int after){
                 // TODO Auto-generated method stub
             }
         });
+
+//        void filter (String text) {
+//            List<Recent> temp = new ArrayList();
+//            for(Recent d: potionList){
+//                //or use .dqual(text) with you want equal match
+//                //use .toLowerCase() for better matches
+//                if(d.getITEM_NAME().contains(text)){
+//                    temp.add(d);
+//                }
+//            }
+//            //update recyclerview
+//            adapter.updateList(temp);
+//        }
 
     }
 

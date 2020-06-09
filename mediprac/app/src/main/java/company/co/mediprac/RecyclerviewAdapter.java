@@ -16,7 +16,7 @@ import java.util.Locale;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> {
 
-    private List<Recent> itemss= null;
+    private List<Recent> itemss = null;
 
     private ArrayList<Recent> mList;
     private LayoutInflater mInflate;
@@ -31,6 +31,11 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
+    }
+
+    public void updateList(List<Recent> list){
+        itemss = list;
+        notifyDataSetChanged();
     }
 
     @NonNull
