@@ -2,10 +2,12 @@ package company.co.mediprac;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -15,13 +17,17 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class TextresultActivity extends AppCompatActivity {
+public class TextresultActivity extends AdlibActivity {
+
+    private PotionListViewAdapter adapter;
 
     public String requestUrl;
     ArrayList<Item> list = null;
     Item bus = null;
     RecyclerView recyclerView;
+    Listview list;
 
     EditText edit;
     //TextView text;
@@ -37,22 +43,46 @@ public class TextresultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
+        init();
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_medlist);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true);
+        //검색창
+        edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void aftrTextChanged(Editablearg0){
+                String text = edit.getText().toString().toLowerCase(Locale.getDefault());
+                adapter.filter(text);
+            }
 
-        // use a linear layout manager
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3){
+                //TODO Auto-generated method stub
+            }
 
+            @Override
+            public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3){
+                // TODO Auto-generated method stub
+            }
+        });
+
+//        CustomList adapter = new CustomList(TextresultActivity.this);
+//        list=(ListView)findViewById(R.layout.activity_textresult);
+//        list.setAdapter(adapter);
+
+//        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_medlist);
+//        // use this setting to improve performance if you know that changes
+//        // in content do not change the layout size of the RecyclerView
+//        recyclerView.setHasFixedSize(true);
+//
+//        // use a linear layout manager
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+//
         //AsyncTask
-        MyAsyncTask myAsyncTask = new MyAsyncTask();
-        myAsyncTask.execute();
-
-        edit= (EditText)findViewById(R.id.edit);
+//        MyAsyncTask myAsyncTask = new MyAsyncTask();
+//        myAsyncTask.execute();
+//
+//        edit= (EditText)findViewById(R.id.edit);
         //text= (TextView)findViewById(R.id.result);
 
 
@@ -61,6 +91,23 @@ public class TextresultActivity extends AppCompatActivity {
         //recyclerView.setAdapter(mAdapter);
 
     }
+
+    public void init(){//포션리스트를 불러와서 어댑터에 장착한다.
+        ButterKnife.bind(this);
+        this.setAdlibKey(TextresultActivity.ADLIB_API_KEY);
+        this.setAdsContainer(R.id.ads);
+
+        ItemList itemlist = new PotionList(this);
+        adapter = new PotionListViewAdapter(this, potionList);
+        listView.setAdapter(adapter);
+    }
+
+    @Bind(R.id.listview)
+    ListView listview;
+    @Bind(R.id.editsearch)
+    EditText editsearch;
+    @Bind(R.id.Layout_Internet)
+    RelativeLayout internetLayout;
 
     public class MyAsyncTask extends AsyncTask<String, Void, String>{
 
