@@ -1,6 +1,6 @@
 package company.co.mediprac;
 
-public class Item {
+public class Recent {
 
     String ITEM_NAME;
     String ENTP_NAME;

@@ -11,14 +11,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> {
 
-    private ArrayList<Item> mList;
+    private List<Recent> itemss= null;
+
+    private ArrayList<Recent> mList;
     private LayoutInflater mInflate;
     private Context mContext;
 
-    public RecyclerviewAdapter(Context context, ArrayList<Item> items){
+    public RecyclerviewAdapter(Context context, ArrayList<Recent> items){
+
+        this.itemss=itemss;
+        mList = new ArrayList<Recent>();
+        mList.addAll(itemss);
+
         this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
@@ -34,16 +43,36 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
     @Override
     public void onBindViewHolder (@NonNull MyViewHolder holder, int position){
+        final Recent item = itemss.get(position);
+        holder.ITEM_NAME.setText(item.getITEM_NAME());
+        holder.ENTP_NAME.setText(item.getENTP_NAME());
         //binding
-        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
-        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
+//        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
+//        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() { //전체 아이템 갯수 리턴.
-        return mList.size();
+        return this.itemss.size();
     }
+
+    public void filter(String charText){
+        charText = charText.toLowerCase(Locale.getDefault());
+        itemss.clear();
+        if(charText.length()==0){
+            itemss.addAll(mList);
+        } else {
+            for (Recent recent : mList) {
+                String name = recent.getITEM_NAME();
+                if (name.toLowerCase().contains(charText)){
+                    itemss.add(recent);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
+
 
     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
         // each data item is just a string in this case

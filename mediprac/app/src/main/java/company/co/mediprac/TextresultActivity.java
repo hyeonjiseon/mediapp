@@ -2,12 +2,13 @@ package company.co.mediprac;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -17,17 +18,19 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
-public class TextresultActivity extends AdlibActivity {
+public class TextresultActivity extends AppCompatActivity {
 
-    private PotionListViewAdapter adapter;
+    //private PotionListViewAdapter adapter;
+    private RecyclerviewAdapter adapter;
+    LinearLayoutManager mLayoutManager;
 
     public String requestUrl;
-    ArrayList<Item> list = null;
-    Item bus = null;
+    //ArrayList<Recent> list = null;
+    Recent bus = null;
     RecyclerView recyclerView;
-    Listview list;
 
     EditText edit;
     //TextView text;
@@ -44,6 +47,56 @@ public class TextresultActivity extends AdlibActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
         init();
+
+        List<Recent> potionList = new ArrayList<Recent>();
+        for(int i=0;i<30;i++){
+            Recent rc = new Recent(i+"","");
+            potionList.add(rc);
+        }
+
+        for(int i=0;i<30;i++){
+            Recent rc = new Recent(i+""+i,"");
+            potionList.add(rc);
+        }
+
+        for(int i=0;i<30;i++){
+            Recent rc = new Recent(i+""+i+""+i,"");
+            potionList.add(rc);
+        }
+
+
+
+//        CustomList adapter = new CustomList(TextresultActivity.this);
+//        list=(ListView)findViewById(R.layout.activity_textresult);
+//        list.setAdapter(adapter);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_medlist);
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        recyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(mLayoutManager);
+
+        // use a linear layout manager
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(layoutManager);
+////
+        //AsyncTask
+//        MyAsyncTask myAsyncTask = new MyAsyncTask();
+//        myAsyncTask.execute();
+//
+        edit = (EditText)findViewById(R.id.edit);
+        //text= (TextView)findViewById(R.id.result);
+
+        adapter = new RecyclerviewAdapter(this, potionList);
+        recyclerView.setAdapter(adapter);
+
+        // specify an adapter (see also next example)
+        //mAdapter = new RecyclerviewAdapter(myDataset);
+        //recyclerView.setAdapter(mAdapter);
 
         //검색창
         edit.addTextChangedListener(new TextWatcher() {
@@ -64,114 +117,88 @@ public class TextresultActivity extends AdlibActivity {
             }
         });
 
-//        CustomList adapter = new CustomList(TextresultActivity.this);
-//        list=(ListView)findViewById(R.layout.activity_textresult);
-//        list.setAdapter(adapter);
-
-//        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_medlist);
-//        // use this setting to improve performance if you know that changes
-//        // in content do not change the layout size of the RecyclerView
-//        recyclerView.setHasFixedSize(true);
-//
-//        // use a linear layout manager
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-//
-        //AsyncTask
-//        MyAsyncTask myAsyncTask = new MyAsyncTask();
-//        myAsyncTask.execute();
-//
-//        edit= (EditText)findViewById(R.id.edit);
-        //text= (TextView)findViewById(R.id.result);
-
-
-        // specify an adapter (see also next example)
-        //mAdapter = new RecyclerviewAdapter(myDataset);
-        //recyclerView.setAdapter(mAdapter);
-
     }
 
-    public void init(){//포션리스트를 불러와서 어댑터에 장착한다.
-        ButterKnife.bind(this);
-        this.setAdlibKey(TextresultActivity.ADLIB_API_KEY);
-        this.setAdsContainer(R.id.ads);
-
-        ItemList itemlist = new PotionList(this);
-        adapter = new PotionListViewAdapter(this, potionList);
-        listView.setAdapter(adapter);
-    }
-
-    @Bind(R.id.listview)
-    ListView listview;
-    @Bind(R.id.editsearch)
-    EditText editsearch;
-    @Bind(R.id.Layout_Internet)
-    RelativeLayout internetLayout;
-
-    public class MyAsyncTask extends AsyncTask<String, Void, String>{
-
-        @Override
-        protected String doInBackground(String... strings){
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey="+key;
-            try{
-                boolean b_ITEM_NAME = false;
-                boolean b_ENTP_NAME = false;
-
-                URL url = new URL(requestUrl);
-                InputStream is = url.openStream();
-                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                XmlPullParser parser = factory.newPullParser();
-                parser.setInput(new InputStreamReader(is, "UTF-8"));
-
-                String tag;
-                int evenType = parser.getEventType();
-
-                while(evenType != XmlPullParser.END_DOCUMENT){
-                    switch(evenType){
-                        case XmlPullParser.START_DOCUMENT:
-                            list = new ArrayList<Item>();
-                            break;
-                        case XmlPullParser.END_DOCUMENT:
-                            break;
-                        case XmlPullParser.END_TAG:
-                            if(parser.getName().equals("item") && bus != null){
-                                list.add(bus);
-                            }
-                            break;
-                        case XmlPullParser.START_TAG:
-                            if(parser.getName().equals("item")){
-                                bus = new Item();
-                            }
-                            if(parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
-                            if(parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
-                            break;
-                        case XmlPullParser.TEXT:
-                            if(b_ITEM_NAME){
-                               bus.setITEM_NAME(parser.getText());
-                               b_ITEM_NAME = false;
-                            } else if(b_ENTP_NAME){
-                                bus.setENTP_NAME(parser.getText());
-                                b_ENTP_NAME = false;
-                            }
-                            break;
-                    }
-                    evenType = parser.next();
-                }
-            } catch(Exception e){
-                e.printStackTrace();
-            }
-            return null;
-        }
-        
-        @Override
-        protected void onPostExecute(String s){
-            super.onPostExecute(s);
-            //어답터 연결
-            RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), list);
-            recyclerView.setAdapter(adapter);
-        }
-    }
+//    public void init(){//포션리스트를 불러와서 어댑터에 장착한다.
+//        ButterKnife.bind(this);
+//        this.setAdlibKey(TextresultActivity.ADLIB_API_KEY);
+//        this.setAdsContainer(R.id.ads);
+//
+//        ItemList itemlist = new PotionList(this);
+//        adapter = new PotionListViewAdapter(this, potionList);
+//        listView.setAdapter(adapter);
+//    }
+//
+//    @Bind(R.id.listview)
+//    ListView listview;
+//    @Bind(R.id.editsearch)
+//    EditText editsearch;
+//    @Bind(R.id.Layout_Internet)
+//    RelativeLayout internetLayout;
+//
+//    public class MyAsyncTask extends AsyncTask<String, Void, String>{
+//
+//        @Override
+//        protected String doInBackground(String... strings){
+//            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey="+key;
+//            try{
+//                boolean b_ITEM_NAME = false;
+//                boolean b_ENTP_NAME = false;
+//
+//                URL url = new URL(requestUrl);
+//                InputStream is = url.openStream();
+//                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+//                XmlPullParser parser = factory.newPullParser();
+//                parser.setInput(new InputStreamReader(is, "UTF-8"));
+//
+//                String tag;
+//                int evenType = parser.getEventType();
+//
+//                while(evenType != XmlPullParser.END_DOCUMENT){
+//                    switch(evenType){
+//                        case XmlPullParser.START_DOCUMENT:
+//                            list = new ArrayList<Recent>();
+//                            break;
+//                        case XmlPullParser.END_DOCUMENT:
+//                            break;
+//                        case XmlPullParser.END_TAG:
+//                            if(parser.getName().equals("item") && bus != null){
+//                                list.add(bus);
+//                            }
+//                            break;
+//                        case XmlPullParser.START_TAG:
+//                            if(parser.getName().equals("item")){
+//                                bus = new Recent();
+//                            }
+//                            if(parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
+//                            if(parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
+//                            break;
+//                        case XmlPullParser.TEXT:
+//                            if(b_ITEM_NAME){
+//                               bus.setITEM_NAME(parser.getText());
+//                               b_ITEM_NAME = false;
+//                            } else if(b_ENTP_NAME){
+//                                bus.setENTP_NAME(parser.getText());
+//                                b_ENTP_NAME = false;
+//                            }
+//                            break;
+//                    }
+//                    evenType = parser.next();
+//                }
+//            } catch(Exception e){
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s){
+//            super.onPostExecute(s);
+//            //어답터 연결
+//            RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), list);
+//            recyclerView.setAdapter(adapter);
+//        }
+//    }
 
     //Button을 클릭했을 때 자동으로 호출되는 callback method....
 //    public void mOnClick(View v){
