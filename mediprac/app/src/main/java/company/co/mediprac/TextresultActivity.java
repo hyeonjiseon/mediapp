@@ -12,26 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.xmlpull.v1.XmlPullParser;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class TextresultActivity extends AppCompatActivity {
 
     private RecyclerviewAdapter adapter;
+    RecyclerView recyclerView;
+    EditText edit;
     LinearLayoutManager mLayoutManager;
+    //ArrayList<Recent> items = null;
+    ArrayList<Recent> items = new ArrayList<>();
 
     public String requestUrl;
-    ArrayList<Recent> list = null;
     Recent bus = null;
-    RecyclerView recyclerView;
-
-    EditText edit;
-    //TextView text;
     XmlPullParser xpp;
-
     public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
     String data;
-
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
@@ -39,58 +35,49 @@ public class TextresultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
-        //init();
 
-        List<Recent> potionList = new ArrayList<Recent>();
+        recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
+        edit = (EditText)findViewById(R.id.edit);
 
-        for(int i=0;i<30;i++){
-            Recent rc = new Recent(i+"","");
-            potionList.add(rc);
-        }
+        edit.addTextChangedListener((TextWatcher) this);
 
-        for(int i=0;i<30;i++){
-            Recent rc = new Recent(i+""+i,"");
-            potionList.add(rc);
-        }
+        //adapter = new RecyclerviewAdapter(this, items);
+        adapter = new RecyclerviewAdapter(getApplicationContext(), items);
 
-        for(int i=0;i<30;i++){
-            Recent rc = new Recent(i+""+i+""+i,"");
-            potionList.add(rc);
-        }
+        // use a linear layout manager
+        // LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        // layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        // recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        recyclerView.setAdapter(adapter);
 
-        
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_medlist);
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);
-
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(mLayoutManager);
-
-        //final DisplayContext displayContext = new DisplayContext();
 
         //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
 
-        // use a linear layout manager
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(layoutManager);
-////
         //AsyncTask
 //        MyAsyncTask myAsyncTask = new MyAsyncTask();
 //        myAsyncTask.execute();
+
+        //String text = edit.toString();
+//        List<Recent> potionList = new ArrayList<Recent>();
 //
-        edit = (EditText)findViewById(R.id.edit);
-        //text= (TextView)findViewById(R.id.result);
-
-        adapter = new RecyclerviewAdapter(this, list);
-        recyclerView.setAdapter(adapter);
-
-        String text = edit.toString();
-
-
-
+//        for(int i=0;i<30;i++){
+//            Recent rc = new Recent(i+"","");
+//            potionList.add(rc);
+//        }
+//
+//        for(int i=0;i<30;i++){
+//            Recent rc = new Recent(i+""+i,"");
+//            potionList.add(rc);
+//        }
+//
+//        for(int i=0;i<30;i++){
+//            Recent rc = new Recent(i+""+i+""+i,"");
+//            potionList.add(rc);
+//        }
 
         // specify an adapter (see also next example)
         //mAdapter = new RecyclerviewAdapter(myDataset);
@@ -98,21 +85,38 @@ public class TextresultActivity extends AppCompatActivity {
 
         //검색창
         edit.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void afterTextChanged(Editable s){
+//                String text = edit.getText().toString().toLowerCase(Locale.getDefault());
+//                adapter.filter(text);
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+//                //TODO Auto-generated method stub
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int count, int after){
+//                // TODO Auto-generated method stub
+//                //adapter.getFilter().filter(charSequence);
+//            }
+
             @Override
-            public void afterTextChanged(Editable s){
-                String text = edit.getText().toString().toLowerCase(Locale.getDefault());
-                adapter.filter(text);
+            public void afterTextChanged(Editable editable){
+
             }
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+            public void beforeTextChanged(CharSequence charSequence, int start, int count, int after){
                 //TODO Auto-generated method stub
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int count, int after){
-                // TODO Auto-generated method stub
+            public void onTextChanged(CharSequence charSequence, int start, int count, int after){
+                adapter.getFilter().filter(charSequence);
             }
+
         });
 
 //        void filter (String text) {
@@ -128,18 +132,9 @@ public class TextresultActivity extends AppCompatActivity {
 //            adapter.updateList(temp);
 //        }
 
+
     }
 
-//    public void init(){//포션리스트를 불러와서 어댑터에 장착한다.
-//        ButterKnife.bind(this);
-//        this.setAdlibKey(TextresultActivity.ADLIB_API_KEY);
-//        this.setAdsContainer(R.id.ads);
-//
-//        ItemList itemlist = new PotionList(this);
-//        adapter = new PotionListViewAdapter(this, potionList);
-//        listView.setAdapter(adapter);
-//    }
-//
 //    @Bind(R.id.listview)
 //    ListView listview;
 //    @Bind(R.id.editsearch)

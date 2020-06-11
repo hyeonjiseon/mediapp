@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,43 +13,44 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> {
+public class RecyclerviewAdapter extends RecyclerView.Adapter<MyViewHolder> implements Filterable {
 
-    private List<Recent> itemss = null;
-
+    private List<Recent> fList;
+    //private ArrayList<Recent> fList;
     private ArrayList<Recent> mList;
     private LayoutInflater mInflate;
     private Context mContext;
 
-    public RecyclerviewAdapter(Context context, ArrayList<Recent> items){
+    public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
 
-        this.itemss=itemss;
-        mList = new ArrayList<Recent>();
-        mList.addAll(itemss);
+        this.fList = items;
+
+//        mList = new ArrayList<Recent>();
+//        mList.addAll(fList);
 
         this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
     }
 
-    public void updateList(List<Recent> list){
-        itemss = list;
-        notifyDataSetChanged();
-    }
+//    public void updateList(List<Recent> list) {
+//        fList = list;
+//        notifyDataSetChanged();
+//    }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View view = mInflate.inflate(R.layout.item, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
-        return viewHolder;
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+          View view = mInflate.inflate(R.layout.item, parent, false);
+          MyViewHolder viewHolder = new MyViewHolder(view);
+          return viewHolder;
+
     }
 
     @Override
-    public void onBindViewHolder (@NonNull MyViewHolder holder, int position){
-        final Recent item = itemss.get(position);
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+        final Recent item = fList.get(position);
         holder.ITEM_NAME.setText(item.getITEM_NAME());
         holder.ENTP_NAME.setText(item.getENTP_NAME());
         //binding
@@ -59,24 +61,46 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() { //전체 아이템 갯수 리턴.
-        return this.itemss.size();
+        return this.fList.size();
     }
 
-    public void filter(String charText){
-        charText = charText.toLowerCase(Locale.getDefault());
-        itemss.clear();
-        if(charText.length()==0){
-            itemss.addAll(mList);
-        } else {
-            for (Recent recent : mList) {
-                String name = recent.getITEM_NAME();
-                if (name.toLowerCase().contains(charText)){
-                    itemss.add(recent);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
+//    public void filter(String charText) {
+//        charText = charText.toLowerCase(Locale.getDefault());
+//        fList.clear();
+//        if (charText.length() == 0) {
+//            fList.addAll(mList);
+//        } else {
+//            for (Recent recent : mList) {
+//                String name = recent.getITEM_NAME();
+//                if (name.toLowerCase().contains(charText)) {
+//                    fList.add(recent);
+//                }
+//            }
+//        }
+//        notifyDataSetChanged();
+//    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+               @Override
+               protected FilterResults performFiltering(CharSequence constraint) {
+                   String charString = constraint.toString();
+                   if(charString.isEmpty()) {
+                       fList = mList;
+                   } else {
+                       ArrayList<String> filteringList = new ArrayList<>();
+                       for(String name : mList) {
+                           if(name.toLowerCase().contains(charString.toLowerCase())) {
+                              filteringList.add(name);
+                            }
+                       }
+                          fList = filteringList;
+                      }
+                      FilterResults filterResults = new FilterResults();
+                      filterResults.values = fList;
+                      return filterResults;
+                  }
 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
@@ -85,7 +109,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         public TextView ITEM_NAME;
         public TextView ENTP_NAME;
 
-        public MyViewHolder(View itemView){
+        public MyViewHolder(View itemView) {
             super(itemView);
             ITEM_NAME = itemView.findViewById(R.id.item_name);
             ENTP_NAME = itemView.findViewById(R.id.entp_name);
@@ -96,7 +120,48 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //        }
     }
 
+//     @Override
+//     public Filter getFilter() {
+//         return new Filter() {
+//             @Override
+//             protected FilterResults performFiltering(CharSequence constraint) {
+//                 String charString = constraint.toString();
+//                 if (charString.isEmpty()) {
+//                     fList = mList;
+//                 } else {
+//                     ArrayList<String> filteringList = new ArrayList<>();
+//                     for (String name : mlist) {
+//                         if (name.toLowerCase().contains(charString.toLowerCase())) {
+//                             filteringList.add(name);
+//                         }
+//                     }
+//                     fList = filteringList;
+//                 }
+//                 FilterResults filterResults = new FilterResults();
+//                 filterResults.values = fList;
+//                 return filterResults;
+//             }
+//         }
+//     }
+//
+//    @Override
+//    protected void publishResults(CharSequence constraint, FilterResults results) {
+//        fList = (ArrayList<String>) results.values;
+//        notifyDataSetChanged();
+//    }
 }
+
+
+
+
+
+
+
+
+
+
+
+  
 
     //private String[] mDataset;
 
