@@ -1,5 +1,6 @@
 package company.co.mediprac;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -10,9 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class TextresultActivity extends AppCompatActivity {
 
@@ -48,6 +52,7 @@ public class TextresultActivity extends AppCompatActivity {
         // LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         // layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         // recyclerView.setLayoutManager(layoutManager);
+        // recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         recyclerView.setAdapter(adapter);
 
@@ -55,11 +60,9 @@ public class TextresultActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
 
-        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-
-        //AsyncTask
-//        MyAsyncTask myAsyncTask = new MyAsyncTask();
-//        myAsyncTask.execute();
+        // AsyncTask
+        MyAsyncTask myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute();
 
         //String text = edit.toString();
 //        List<Recent> potionList = new ArrayList<Recent>();
@@ -114,10 +117,74 @@ public class TextresultActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int start, int count, int after){
-                adapter.getFilter().filter(charSequence);
+                //adapter.getFilter().filter(charSequence);
             }
 
         });
+
+        public class MyAsyncTask extends AsyncTask<String, Void, String> {
+
+            @Override
+            protected String doInBackground(String... strings){
+                requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey="+key;
+                try{
+                    boolean b_ITEM_NAME = false;
+                    boolean b_ENTP_NAME = false;
+
+                    URL url = new URL(requestUrl);
+                    InputStream is = url.openStream();
+                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                    XmlPullParser parser = factory.newPullParser();
+                    parser.setInput(new InputStreamReader(is, "UTF-8"));
+
+                    String tag;
+                    int evenType = parser.getEventType();
+
+                    while(evenType != XmlPullParser.END_DOCUMENT){
+                        switch(evenType){
+                            case XmlPullParser.START_DOCUMENT:
+                                list = new ArrayList<Recent>();
+                                break;
+                            case XmlPullParser.END_DOCUMENT:
+                                break;
+                            case XmlPullParser.END_TAG:
+                                if(parser.getName().equals("item") && bus != null){
+                                    list.add(bus);
+                                }
+                                break;
+                            case XmlPullParser.START_TAG:
+                                if(parser.getName().equals("item")){
+                                    bus = new Recent();
+                                }
+                                if(parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
+                                if(parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
+                                break;
+                            case XmlPullParser.TEXT:
+                                if(b_ITEM_NAME){
+                                    bus.setITEM_NAME(parser.getText());
+                                    b_ITEM_NAME = false;
+                                } else if(b_ENTP_NAME){
+                                    bus.setENTP_NAME(parser.getText());
+                                    b_ENTP_NAME = false;
+                                }
+                                break;
+                        }
+                        evenType = parser.next();
+                    }
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(String s){
+                super.onPostExecute(s);
+                //어답터 연결
+                RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), list);
+                recyclerView.setAdapter(adapter);
+            }
+        }
 
 //        void filter (String text) {
 //            List<Recent> temp = new ArrayList();
@@ -142,69 +209,7 @@ public class TextresultActivity extends AppCompatActivity {
 //    @Bind(R.id.Layout_Internet)
 //    RelativeLayout internetLayout;
 //
-//    public class MyAsyncTask extends AsyncTask<String, Void, String>{
-//
-//        @Override
-//        protected String doInBackground(String... strings){
-//            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey="+key;
-//            try{
-//                boolean b_ITEM_NAME = false;
-//                boolean b_ENTP_NAME = false;
-//
-//                URL url = new URL(requestUrl);
-//                InputStream is = url.openStream();
-//                XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-//                XmlPullParser parser = factory.newPullParser();
-//                parser.setInput(new InputStreamReader(is, "UTF-8"));
-//
-//                String tag;
-//                int evenType = parser.getEventType();
-//
-//                while(evenType != XmlPullParser.END_DOCUMENT){
-//                    switch(evenType){
-//                        case XmlPullParser.START_DOCUMENT:
-//                            list = new ArrayList<Recent>();
-//                            break;
-//                        case XmlPullParser.END_DOCUMENT:
-//                            break;
-//                        case XmlPullParser.END_TAG:
-//                            if(parser.getName().equals("item") && bus != null){
-//                                list.add(bus);
-//                            }
-//                            break;
-//                        case XmlPullParser.START_TAG:
-//                            if(parser.getName().equals("item")){
-//                                bus = new Recent();
-//                            }
-//                            if(parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
-//                            if(parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
-//                            break;
-//                        case XmlPullParser.TEXT:
-//                            if(b_ITEM_NAME){
-//                               bus.setITEM_NAME(parser.getText());
-//                               b_ITEM_NAME = false;
-//                            } else if(b_ENTP_NAME){
-//                                bus.setENTP_NAME(parser.getText());
-//                                b_ENTP_NAME = false;
-//                            }
-//                            break;
-//                    }
-//                    evenType = parser.next();
-//                }
-//            } catch(Exception e){
-//                e.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String s){
-//            super.onPostExecute(s);
-//            //어답터 연결
-//            RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), list);
-//            recyclerView.setAdapter(adapter);
-//        }
-//    }
+
 
     //Button을 클릭했을 때 자동으로 호출되는 callback method....
 //    public void mOnClick(View v){
