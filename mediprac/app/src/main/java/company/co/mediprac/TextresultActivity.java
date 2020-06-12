@@ -1,21 +1,15 @@
 package company.co.mediprac;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.widget.EditText;
+import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserFactory;
-
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class TextresultActivity extends AppCompatActivity {
@@ -27,16 +21,16 @@ public class TextresultActivity extends AppCompatActivity {
     //ArrayList<Recent> items = null;
     ArrayList<Recent> items = new ArrayList<>();
 
-    public String requestUrl;
-    ArrayList<Recent> list = null;
-    Recent bus = null;
-    XmlPullParser xpp;
-    public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
-    String data;
 
+//    public String requestUrl;
+//    ArrayList<Recent> list = null;
+//    Recent bus = null;
+//    XmlPullParser xpp;
+//    public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
+//    String data;
 
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
+//    private RecyclerView.Adapter mAdapter;
+//    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +39,7 @@ public class TextresultActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
         edit = (EditText)findViewById(R.id.edit);
-
-        edit.addTextChangedListener((TextWatcher) this);
+        //edit.addTextChangedListener((TextWatcher) this);
 
         //adapter = new RecyclerviewAdapter(this, items);
         adapter = new RecyclerviewAdapter(getApplicationContext(), items);
@@ -125,69 +118,70 @@ public class TextresultActivity extends AppCompatActivity {
 
         });
 
-        class MyAsyncTask extends AsyncTask<String, Void, String> {
-
-            @Override
-            protected String doInBackground(String... strings){
-                requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey="+key;
-                try{
-                    boolean b_ITEM_NAME = false;
-                    boolean b_ENTP_NAME = false;
-
-                    URL url = new URL(requestUrl);
-                    InputStream is = url.openStream();
-                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-                    XmlPullParser parser = factory.newPullParser();
-                    parser.setInput(new InputStreamReader(is, "UTF-8"));
-
-                    String tag;
-                    int evenType = parser.getEventType();
-
-                    while(evenType != XmlPullParser.END_DOCUMENT){
-                        switch(evenType){
-                            case XmlPullParser.START_DOCUMENT:
-                                list = new ArrayList<Recent>();
-                                break;
-                            case XmlPullParser.END_DOCUMENT:
-                                break;
-                            case XmlPullParser.END_TAG:
-                                if(parser.getName().equals("item") && bus != null){
-                                    list.add(bus);
-                                }
-                                break;
-                            case XmlPullParser.START_TAG:
-                                if(parser.getName().equals("item")){
-                                    bus = new Recent();
-                                }
-                                if(parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
-                                if(parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
-                                break;
-                            case XmlPullParser.TEXT:
-                                if(b_ITEM_NAME){
-                                    bus.setITEM_NAME(parser.getText());
-                                    b_ITEM_NAME = false;
-                                } else if(b_ENTP_NAME){
-                                    bus.setENTP_NAME(parser.getText());
-                                    b_ENTP_NAME = false;
-                                }
-                                break;
-                        }
-                        evenType = parser.next();
-                    }
-                } catch(Exception e){
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(String s){
-                super.onPostExecute(s);
-                //어답터 연결
-                RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), items);
-                recyclerView.setAdapter(adapter);
-            }
-        }
+//        public class MyAsyncTask extends AsyncTask<String, Void, String> { // <Params, Progress, Result> // Void == '사용하지 않음'
+//
+//            @Override
+//            protected String doInBackground(String... strings){
+//                requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey="+key;
+//                try{
+//                    boolean b_ITEM_NAME = false;
+//                    boolean b_ENTP_NAME = false;
+//
+//                    URL url = new URL(requestUrl);
+//                    InputStream is = url.openStream();
+//                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+//                    XmlPullParser parser = factory.newPullParser();
+//                    parser.setInput(new InputStreamReader(is, "UTF-8"));
+//
+//                    String tag;
+//                    int evenType = parser.getEventType();
+//
+//                    while(evenType != XmlPullParser.END_DOCUMENT){
+//                        switch(evenType){
+//                            case XmlPullParser.START_DOCUMENT:
+//                                list = new ArrayList<Recent>();
+//                                break;
+//                            case XmlPullParser.END_DOCUMENT:
+//                                break;
+//                            case XmlPullParser.END_TAG:
+//                                if(parser.getName().equals("item") && bus != null){
+//                                    list.add(bus);
+//                                }
+//                                break;
+//                            case XmlPullParser.START_TAG:
+//                                if(parser.getName().equals("item")){
+//                                    bus = new Recent();
+//                                }
+//                                if(parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
+//                                if(parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
+//                                break;
+//                            case XmlPullParser.TEXT:
+//                                if(b_ITEM_NAME){
+//                                    bus.setITEM_NAME(parser.getText());
+//                                    b_ITEM_NAME = false;
+//                                } else if(b_ENTP_NAME){
+//                                    bus.setENTP_NAME(parser.getText());
+//                                    b_ENTP_NAME = false;
+//                                }
+//                                break;
+//                        }
+//                        evenType = parser.next();
+//                    }
+//                } catch(Exception e){
+//                    e.printStackTrace();
+//                }
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(String s){
+//                super.onPostExecute(s);
+//                Log.v("myBackgroundTask", "Starting Background Task");
+//                //어답터 연결
+//                RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), items);
+//                recyclerView.setAdapter(adapter);
+//            }
+//        }
 
 //        void filter (String text) {
 //            List<Recent> temp = new ArrayList();
@@ -347,4 +341,3 @@ public class TextresultActivity extends AppCompatActivity {
 //    }//getXmlData method....
 }
 
-}
