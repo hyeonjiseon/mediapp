@@ -2,8 +2,6 @@ package company.co.mediprac;
 
 import android.os.AsyncTask;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
@@ -79,9 +77,9 @@ public class MyAsyncTask extends AsyncTask <String, Void, String> {
     protected void onPostExecute(String s){
         super.onPostExecute(s);
         //어답터 연결
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
-        RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), items);
-        recyclerView.setAdapter(adapter);
+//        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
+//        RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), items);
+//        recyclerView.setAdapter(adapter);
     }
 
 //    @Override

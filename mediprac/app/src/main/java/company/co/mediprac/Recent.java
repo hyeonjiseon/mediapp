@@ -2,8 +2,8 @@ package company.co.mediprac;
 
 public class Recent {
 
-    String ITEM_NAME;
-    String ENTP_NAME;
+    private String ITEM_NAME;
+    private String ENTP_NAME;
     String ITEM_PERMIT_DATE;
     String INDUTY;
     String PRDLST_STDR_CODE; //195500002

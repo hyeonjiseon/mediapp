@@ -3,23 +3,30 @@ package company.co.mediprac;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TextresultActivity extends AppCompatActivity {
+public class TextresultActivity extends AppCompatActivity implements RecyclerviewAdapter.onItemListener {
 
     private RecyclerviewAdapter adapter;
     RecyclerView recyclerView;
     EditText edit;
     LinearLayoutManager mLayoutManager;
     //ArrayList<Recent> items = null;
-    ArrayList<Recent> items = new ArrayList<>();
+    //ArrayList<Recent> items = new ArrayList<>();
+    private List<Recent> itemList;
 
 
 //    public String requestUrl;
@@ -37,24 +44,10 @@ public class TextresultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
 
-        recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
+        setUpRecyclerView();
+
         edit = (EditText)findViewById(R.id.edit);
         //edit.addTextChangedListener((TextWatcher) this);
-
-        //adapter = new RecyclerviewAdapter(this, items);
-        adapter = new RecyclerviewAdapter(getApplicationContext(), items);
-
-        // use a linear layout manager
-        // LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        // layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        // recyclerView.setLayoutManager(layoutManager);
-        // recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
-        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
 
         // AsyncTask
         MyAsyncTask myAsyncTask = new MyAsyncTask();
@@ -197,6 +190,71 @@ public class TextresultActivity extends AppCompatActivity {
 //        }
 
 
+    }
+
+    private void setUpRecyclerView(){
+        RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
+        recyclerView.setHasFixedSize(true);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+
+        //adapter = new RecyclerviewAdapter(this, items);
+        itemList = new ArrayList<>();//샘플데이터
+        fillData();
+        adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) itemList);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        //adapter = new RecyclerviewAdapter(getApplicationContext(), item);
+
+        //데이터셋 변경 시 adapter.dataSetChanged(exampleList);
+        //어댑터의 리스너 호출
+        adapter.setOnClickListener(this);
+
+        // use a linear layout manager
+        // LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        // layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        // recyclerView.setLayoutManager(layoutManager);
+        // recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+//        recyclerView.setAdapter(adapter);
+//
+//
+//        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(mLayoutManager);
+    }
+
+    private void fillData(){
+        itemList = new ArrayList<>();
+        itemList.add(new Recent("종근당1", "종근당2"));
+        itemList.add(new Recent("흑설탕1", "흑설탕2"));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem searchItem = menu.findItem(R.id.text_searchbtn);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query){
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText){
+                adapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        Toast.makeText(this, ""+position, Toast.LENGTH_SHORT).show();
     }
 
 //    @Bind(R.id.listview)

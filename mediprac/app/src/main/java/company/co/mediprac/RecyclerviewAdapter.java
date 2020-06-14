@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.SearchView;
 import android.widget.TextView;
@@ -12,25 +13,40 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.List;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> implements Filterable {
 
-    //private List<Recent> fList;
-    private ArrayList<Recent> filterList;
-    private static ArrayList<Recent> mList;
+    private List<Recent> filterList;
+    private List<Recent> mList;
+    //private ArrayList<Recent> filterList;
+    //private static ArrayList<Recent> mList;
     private LayoutInflater mInflate;
     private Context mContext;
     SearchView searchView;
 
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
-        this.filterList = items;
-        this.mList = items;
+        filterList = items;
+        mList = new ArrayList<>(items);
+
+        //this.filterList = items;
+        //this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
 //        mList = new ArrayList<Recent>();
 //        mList.addAll(filterList);
     }
+
+    private onItemListener mListener;
+    public void setOnClickListener(onItemListener listener){
+        mListener = listener;
+    }
+
+    public void dataSetChanged(List<Recent> exampleList){
+        filterList = exampleList;
+        notifyDataSetChanged();
+    }
+
 
 //    public void updateList(List<Recent> list) {
 //        fList = list;
@@ -46,59 +62,89 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     } // 어댑터라는 존재가 필요한 만큼 뷰 홀더를 생성하고, 뷰 홀더안에 표시할 데이터와 연결
 
     @Override // 뷰 홀더가 필요한 위치에 할당 될 때, 어댑터는 onBindViewHolder() 함수를 호출
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-//        final Recent item = filterList.get(position);
-//        holder.ITEM_NAME.setText(item.getITEM_NAME());
-//        holder.ENTP_NAME.setText(item.getENTP_NAME());
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+        Recent currentitem = filterList.get(position);
+        holder.ITEM_NAME.setText(currentitem.getITEM_NAME());
+        holder.ENTP_NAME.setText(currentitem.getENTP_NAME());
         //binding
-        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
-        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
+//        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
+//        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
+
+        if(mListener != null){
+            final int pos = position;
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    mListener.onItemClicked(position);
+                }
+            });
+        }
     }
+
+    public Filter getFilter(){
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint){
+            List<Recent> filteredList = new ArrayList<>();
+            if(constraint == null || constraint.length() == 0){
+                filteredList.addAll(filterList);
+            } else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+                for (Recent item : mList){
+                    if (item.getITEM_NAME().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results){
+            filterList.clear();
+            filterList.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     @Override // Return the size of your dataset (invoked by the layout manager)
     public int getItemCount() { //전체 아이템 갯수 리턴.
         return this.filterList.size();
     }
+//
+//    public void filter(String charText) {
+//        charText = charText.toLowerCase(Locale.getDefault());
+//        filterList.clear();
+//        if (charText.length() == 0) {
+//            filterList.addAll(mList);
+//        } else {
+//            for (Recent recent : mList) {
+//                String name = recent.getITEM_NAME();
+//                if (name.toLowerCase().contains(charText)) {
+//                    filterList.add(recent);
+//                }
+//            }
+//        }
+//        notifyDataSetChanged();
+//    }
 
-    public void filter(String charText) {
-        charText = charText.toLowerCase(Locale.getDefault());
-        filterList.clear();
-        if (charText.length() == 0) {
-            filterList.addAll(mList);
-        } else {
-            for (Recent recent : mList) {
-                String name = recent.getITEM_NAME();
-                if (name.toLowerCase().contains(charText)) {
-                    filterList.add(recent);
-                }
-            }
-        }
-        notifyDataSetChanged();
-    }
-
-    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-        @Override
-        public boolean onQueryTextSubmit(String query) {
-            adapter.filter(query);
-            return true;
-        }
-
-        @Override
-        public boolean onQueryTextChange(String newText) {
-            adapter.filter(newText);
-            return true;
-        }
-    });
-
-
-
-
-
-
-
-
-
-
+//    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//        @Override
+//        public boolean onQueryTextSubmit(String query) {
+//            adapter.filter(query);
+//            return true;
+//        }
+//
+//        @Override
+//        public boolean onQueryTextChange(String newText) {
+//            adapter.filter(newText);
+//            return true;
+//        }
+//    });
 
 //    @Override
 //    public Filter getFilter() {
@@ -141,6 +187,10 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //            textView = v.findViewById(R.id.result);
 //        }
             }
+
+    public interface onItemListener{
+                void onItemClicked(int position);
+    }
 
 //     @Override
 //     public Filter getFilter() {
