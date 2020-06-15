@@ -32,9 +32,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         super();
 
         this.filterList = items;
-        //this.mList = new ArrayList<>(items);
+        this.mList = new ArrayList<>(items);
         //this.mList = items;
-        mList = new ArrayList<>(items);
+        //mList = new ArrayList<>(items);
 
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
@@ -61,14 +61,13 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     } // 어댑터라는 존재가 필요한 만큼 뷰 홀더를 생성하고, 뷰 홀더안에 표시할 데이터와 연결
 
     @Override // 뷰 홀더가 필요한 위치에 할당 될 때, 어댑터는 onBindViewHolder() 함수를 호출
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         //binding
 //        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
 //        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
 
-        Recent currentitem = filterList.get(position);
-        holder.ITEM_NAME.setText(currentitem.getITEM_NAME());
-        holder.ENTP_NAME.setText(currentitem.getENTP_NAME());
+        holder.ITEM_NAME.setText(filterList.get(position).getITEM_NAME());
+        holder.ENTP_NAME.setText(filterList.get(position).getENTP_NAME());
 
         if(mListener != null){
             final int pos = position;
@@ -84,32 +83,32 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public Filter getFilter(){
         return exampleFilter;
     }
-
-    private Filter exampleFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint){
-            List<Recent> filteredList = new ArrayList<>();
-            if(constraint == null || constraint.length() == 0){
-                filteredList.addAll(filterList);
-            } else{
-                String filterPattern = constraint.toString().toLowerCase().trim();
-                for (Recent item : mList){
-                    if (item.getITEM_NAME().toLowerCase().contains(filterPattern)){
-                        filteredList.add(item);
-                    }
-                }
-            }
-            FilterResults results = new FilterResults();
-            results.values = filteredList;
-            return results;
-        }
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results){
-            filterList.clear();
-            filterList.addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-    };
+//
+//    private Filter exampleFilter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence constraint){
+//            List<Recent> filteredList = new ArrayList<>();
+//            if(constraint == null || constraint.length() == 0){
+//                filteredList.addAll(filterList);
+//            } else{
+//                String filterPattern = constraint.toString().toLowerCase().trim();
+//                for (Recent item : mList){
+//                    if (item.getITEM_NAME().toLowerCase().contains(filterPattern)){
+//                        filteredList.add(item);
+//                    }
+//                }
+//            }
+//            FilterResults results = new FilterResults();
+//            results.values = filteredList;
+//            return results;
+//        }
+//        @Override
+//        protected void publishResults(CharSequence constraint, FilterResults results){
+//            filterList.clear();
+//            filterList.addAll((List) results.values);
+//            notifyDataSetChanged();
+//        }
+//    };
 
     @Override // Return the size of your dataset (invoked by the layout manager)
     public int getItemCount() { //전체 아이템 갯수 리턴.
@@ -134,36 +133,33 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                 void onItemClicked(int position);
     }
 
-//     @Override
-//     public Filter getFilter() {
-//         return new Filter() {
-//             @Override
-//             protected FilterResults performFiltering(CharSequence constraint) {
-//                 String charString = constraint.toString();
-//                 if (charString.isEmpty()) {
-//                     filterList = mList;
-//                 } else {
-//                     ArrayList<String> filteringList = new ArrayList<>();
-//                     for (String name : mlist) {
-//                         if (name.toLowerCase().contains(charString.toLowerCase())) {
-//                             filteringList.add(name);
-//                         }
-//                     }
-//                     filterList = filteringList;
-//                 }
-//                 FilterResults filterResults = new FilterResults();
-//                 filterResults.values = filterList;
-//                 return filterResults;
-//             }
-//         }
-//     }
-//
-//    @Override
-//    protected void publishResults(CharSequence constraint, FilterResults results) {
-//        fList = (ArrayList<String>) results.values;
-//        notifyDataSetChanged();
-//    }
- }
+     public Filter exampleFilter = new Filter() {
+         @Override
+         protected FilterResults performFiltering(CharSequence constraint) {
+             String charString = constraint.toString();
+             if (charString.isEmpty()) {
+                 filterList = mList;
+             } else {
+                 ArrayList<Recent> filteringList = new ArrayList<>();
+                 for (Recent name : mList) {
+                     if (name.getITEM_NAME().toLowerCase().contains(charString.toLowerCase())) {
+                         filteringList.add(name);
+                     }
+                 }
+                 filterList = filteringList;
+             }
+             FilterResults filterResults = new FilterResults();
+             filterResults.values = filterList;
+             return filterResults;
+         }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filterList = (ArrayList<Recent>) results.values;
+            notifyDataSetChanged();
+        }
+    };
+}
 
     // Create new views (invoked by the layout manager)
 //    @Override // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
