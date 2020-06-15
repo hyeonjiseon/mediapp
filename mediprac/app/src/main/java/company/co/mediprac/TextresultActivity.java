@@ -30,8 +30,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     //private RecyclerviewAdapter adapter;
 
     //LinearLayoutManager mLayoutManager;
-
-    ArrayList<Recent> mList = null;
+    ArrayList<Recent> mList;
+    //ArrayList<Recent> mList = null;
     //ArrayList<Recent> items = new ArrayList<>();
     //private List<Recent> itemList;
     //ArrayList<Recent> items = null;
@@ -39,21 +39,24 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     String data;
 
 //  EditText edit;
-    private RecyclerView.LayoutManager layoutManager;
+//    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
 
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+
         //setUpRecyclerView();
-        RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
-        recyclerView.setHasFixedSize(true);
+        //RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
+        //recyclerView.setHasFixedSize(true);
 
         //layoutManager = new LinearLayoutManager(this);
-         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-         recyclerView.setLayoutManager(layoutManager);
+//         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//         recyclerView.setLayoutManager(layoutManager);
 
         //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 //        mLayoutManager = new LinearLayoutManager(getApplicationContext());
@@ -157,10 +160,16 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             public boolean onQueryTextChange(String newText) {
                 RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
                 adapter.getFilter().filter(newText);
-                return false;
+                //return false;
+                return true;
             }
         });
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -229,6 +238,11 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
             RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
             recyclerView.setAdapter(adapter);
+
+            recyclerView.setHasFixedSize(true);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            recyclerView.setLayoutManager(layoutManager);
 
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(dividerItemDecoration);

@@ -13,14 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> implements Filterable {
 
-    private List<Recent> filterList;
-    private List<Recent> mList;
-    //private ArrayList<Recent> mList;
-    //private ArrayList<Recent> filterList;
+    //private List<Recent> filterList;
+    //private List<Recent> mList;
+    private ArrayList<Recent> mList;
+    private ArrayList<Recent> filterList;
     //private static ArrayList<Recent> mList;
     private LayoutInflater mInflate;
     private Context mContext;
@@ -29,11 +28,11 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
         //filterList = items;
 
-        super();
+        //super();
 
         this.filterList = items;
-        this.mList = new ArrayList<>(items);
-        //this.mList = items;
+        //this.mList = new ArrayList<>(items);
+        this.mList = items;
         //mList = new ArrayList<>(items);
 
         this.mInflate = LayoutInflater.from(context);
@@ -42,23 +41,29 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //        mList.addAll(filterList);
     }
 
+    @Override
+    public RecyclerviewAdapter.MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item, viewGroup, false);
+        return new MyViewHolder(view);
+    }
+
     private onItemListener mListener;
     public void setOnClickListener(onItemListener listener){
         mListener = listener;
     }
 
-    public void dataSetChanged(List<Recent> exampleList){
+    public void dataSetChanged(ArrayList<Recent> exampleList){
         filterList = exampleList;
         notifyDataSetChanged();
     }
 
-    @NonNull // 뷰 홀더는 각 리사이클러 뷰에 하나 이상으로 존재하게 되며, 각 한 줄을 표현
-    @Override // 각 뷰 홀더는 어댑터에 의해 관리되며 이 객체는 RecyclerView.Adapter 객체
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflate.inflate(R.layout.item, parent, false);
-        MyViewHolder viewHolder = new MyViewHolder(view);
-        return viewHolder;
-    } // 어댑터라는 존재가 필요한 만큼 뷰 홀더를 생성하고, 뷰 홀더안에 표시할 데이터와 연결
+//    @NonNull // 뷰 홀더는 각 리사이클러 뷰에 하나 이상으로 존재하게 되며, 각 한 줄을 표현
+//    @Override // 각 뷰 홀더는 어댑터에 의해 관리되며 이 객체는 RecyclerView.Adapter 객체
+//    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        View view = mInflate.inflate(R.layout.item, parent, false);
+//        MyViewHolder viewHolder = new MyViewHolder(view);
+//        return viewHolder;
+//    } // 어댑터라는 존재가 필요한 만큼 뷰 홀더를 생성하고, 뷰 홀더안에 표시할 데이터와 연결
 
     @Override // 뷰 홀더가 필요한 위치에 할당 될 때, 어댑터는 onBindViewHolder() 함수를 호출
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
@@ -69,46 +74,20 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         holder.ITEM_NAME.setText(filterList.get(position).getITEM_NAME());
         holder.ENTP_NAME.setText(filterList.get(position).getENTP_NAME());
 
-        if(mListener != null){
-            final int pos = position;
-            holder.itemView.setOnClickListener(new View.OnClickListener(){
-                @Override
-                public void onClick(View v){
-                    mListener.onItemClicked(position);
-                }
-            });
-        }
+//        if(mListener != null){
+//            final int pos = position;
+//            holder.itemView.setOnClickListener(new View.OnClickListener(){
+//                @Override
+//                public void onClick(View v){
+//                    mListener.onItemClicked(position);
+//                }
+//            });
+//        }
     }
 
     public Filter getFilter(){
         return exampleFilter;
     }
-//
-//    private Filter exampleFilter = new Filter() {
-//        @Override
-//        protected FilterResults performFiltering(CharSequence constraint){
-//            List<Recent> filteredList = new ArrayList<>();
-//            if(constraint == null || constraint.length() == 0){
-//                filteredList.addAll(filterList);
-//            } else{
-//                String filterPattern = constraint.toString().toLowerCase().trim();
-//                for (Recent item : mList){
-//                    if (item.getITEM_NAME().toLowerCase().contains(filterPattern)){
-//                        filteredList.add(item);
-//                    }
-//                }
-//            }
-//            FilterResults results = new FilterResults();
-//            results.values = filteredList;
-//            return results;
-//        }
-//        @Override
-//        protected void publishResults(CharSequence constraint, FilterResults results){
-//            filterList.clear();
-//            filterList.addAll((List) results.values);
-//            notifyDataSetChanged();
-//        }
-//    };
 
     @Override // Return the size of your dataset (invoked by the layout manager)
     public int getItemCount() { //전체 아이템 갯수 리턴.
@@ -119,8 +98,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
          // each data item is just a string in this case
          //public TextView textView;
-         public TextView ITEM_NAME;
-         public TextView ENTP_NAME;
+//         public TextView ITEM_NAME;
+//         public TextView ENTP_NAME;
+        private TextView ITEM_NAME, ENTP_NAME;
 
          public MyViewHolder(View itemView) {
              super(itemView);
@@ -130,7 +110,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     }
 
     public interface onItemListener{
-                void onItemClicked(int position);
+        void onItemClicked(int position);
     }
 
      public Filter exampleFilter = new Filter() {
@@ -141,9 +121,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                  filterList = mList;
              } else {
                  ArrayList<Recent> filteringList = new ArrayList<>();
-                 for (Recent name : mList) {
-                     if (name.getITEM_NAME().toLowerCase().contains(charString.toLowerCase())) {
-                         filteringList.add(name);
+                 for (Recent item : mList) {
+                     if (item.getITEM_NAME().toLowerCase().contains(charString.toLowerCase().trim())) {
+                         filteringList.add(item);
                      }
                  }
                  filterList = filteringList;
@@ -152,15 +132,15 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
              filterResults.values = filterList;
              return filterResults;
          }
-
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            filterList = (ArrayList<Recent>) results.values;
-            notifyDataSetChanged();
+//            filterList.clear();
+//            filterList.addAll((List) results.values);
+             filterList = (ArrayList<Recent>) results.values;
+             notifyDataSetChanged();
         }
     };
 }
-
     // Create new views (invoked by the layout manager)
 //    @Override // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
 //    public RecyclerviewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
