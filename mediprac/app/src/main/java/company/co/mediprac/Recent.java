@@ -2,18 +2,18 @@ package company.co.mediprac;
 
 public class Recent {
 
-    private String ITEM_NAME;
-    private String ENTP_NAME;
+    String ITEM_NAME;
+    String ENTP_NAME;
     String ITEM_PERMIT_DATE;
     String INDUTY;
     String PRDLST_STDR_CODE; //195500002
     String SPCLTY_PBLC; //전문의약품
 
-    public Recent(){}
-    public Recent(String ITEM_NAME, String ENTP_NAME){
-        this.ITEM_NAME = ITEM_NAME;
-        this.ENTP_NAME = ENTP_NAME;
-    }
+//    public Recent(){}
+//    public Recent(String ITEM_NAME, String ENTP_NAME){
+//        this.ITEM_NAME = ITEM_NAME;
+//        this.ENTP_NAME = ENTP_NAME;
+//    }
 
     public String getITEM_NAME() { return ITEM_NAME; }
     public String getENTP_NAME() { return ENTP_NAME; }

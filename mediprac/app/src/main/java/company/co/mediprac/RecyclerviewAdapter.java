@@ -18,7 +18,8 @@ import java.util.List;
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> implements Filterable {
 
     private List<Recent> filterList;
-    private List<Recent> mList;
+    //private List<Recent> mList;
+    private ArrayList<Recent> mList;
     //private ArrayList<Recent> filterList;
     //private static ArrayList<Recent> mList;
     private LayoutInflater mInflate;
@@ -59,13 +60,14 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     } // 어댑터라는 존재가 필요한 만큼 뷰 홀더를 생성하고, 뷰 홀더안에 표시할 데이터와 연결
 
     @Override // 뷰 홀더가 필요한 위치에 할당 될 때, 어댑터는 onBindViewHolder() 함수를 호출
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+        //binding
+        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
+        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
+
         Recent currentitem = filterList.get(position);
         holder.ITEM_NAME.setText(currentitem.getITEM_NAME());
         holder.ENTP_NAME.setText(currentitem.getENTP_NAME());
-        //binding
-//        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
-//        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
 
         if(mListener != null){
             final int pos = position;
@@ -110,7 +112,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
     @Override // Return the size of your dataset (invoked by the layout manager)
     public int getItemCount() { //전체 아이템 갯수 리턴.
-        return this.filterList.size();
+        //return this.filterList.size();
+        return mList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
