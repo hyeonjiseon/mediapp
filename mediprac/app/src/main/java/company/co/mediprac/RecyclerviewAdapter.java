@@ -26,11 +26,14 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     SearchView searchView;
 
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
-        filterList = items;
-        mList = new ArrayList<>(items);
+        //filterList = items;
+        //mList = new ArrayList<>(items);
 
-        //this.filterList = items;
-        //this.mList = items;
+        super();
+
+        this.filterList = items;
+        //this.mList = new ArrayList<>(items);
+        this.mList = items;
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
 //        mList = new ArrayList<Recent>();
@@ -109,49 +112,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public int getItemCount() { //전체 아이템 갯수 리턴.
         return this.filterList.size();
     }
-//
-//    public void filter(String charText) {
-//        charText = charText.toLowerCase(Locale.getDefault());
-//        filterList.clear();
-//        if (charText.length() == 0) {
-//            filterList.addAll(mList);
-//        } else {
-//            for (Recent recent : mList) {
-//                String name = recent.getITEM_NAME();
-//                if (name.toLowerCase().contains(charText)) {
-//                    filterList.add(recent);
-//                }
-//            }
-//        }
-//        notifyDataSetChanged();
-//    }
 
-//    @Override
-//    public Filter getFilter() {
-//        return new Filter() {
-//            @Override
-//            protected FilterResults performFiltering(CharSequence constraint) {
-//                String charString = constraint.toString();
-//                if (charString.isEmpty()) {
-//                    fList = mList;
-//                } else {
-//                    ArrayList<String> filteringList = new ArrayList<>();
-//                    for (String name : mList) {
-//                        if (name.toLowerCase().contains(charString.toLowerCase())) {
-//                            filteringList.add(name);
-//                        }
-//                    }
-//                    fList = filteringList;
-//                }
-//                FilterResults filterResults = new FilterResults();
-//                filterResults.values = fList;
-//                return filterResults;
-//            }
-//        }
-//    }
-
-
-     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
+    public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
          // each data item is just a string in this case
          //public TextView textView;
          public TextView ITEM_NAME;
@@ -162,12 +124,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
              ITEM_NAME = itemView.findViewById(R.id.item_name);
              ENTP_NAME = itemView.findViewById(R.id.entp_name);
          }
-
-//        public MyViewHolder(TextView v) {
-//            super(v);
-//            textView = v.findViewById(R.id.result);
-//        }
-            }
+    }
 
     public interface onItemListener{
                 void onItemClicked(int position);
@@ -216,15 +173,4 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //        MyViewHolder vh = new MyViewHolder(text);
 //        return vh;
 //    }
-
-    // Replace the contents of a view (invoked by the layout manager)
-//    @Override
-//    public void onBindViewHolder(MyViewHolder holder, int position) { //position에 해당하는 데이터를 뷰홀더의 아이템뷰에 표시.
-//        // - get element from your dataset at this position
-//        // - replace the contents of the view with that element
-//        holder.textView.setText(mDataset[position]);
-//
-//    }
-//
-
 //}

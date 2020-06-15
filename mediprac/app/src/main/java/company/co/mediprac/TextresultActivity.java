@@ -23,11 +23,12 @@ import java.util.List;
 
 public class TextresultActivity extends AppCompatActivity implements RecyclerviewAdapter.onItemListener {
 
-    private List<Recent> items;
+    private List<Recent> mList;
     public String requestUrl;
     Recent bus = null;
     public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
-    RecyclerView recyclerView;
+    //어답터 연결
+
     private RecyclerviewAdapter adapter;
     //LinearLayoutManager mLayoutManager;
 
@@ -144,7 +145,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         getMenuInflater().inflate(R.menu.menu, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
-
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -164,7 +164,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
     @Override
     public void onItemClicked(int position) {
-        Toast.makeText(this, "" + position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "클릭" + position, Toast.LENGTH_SHORT).show();
     }
 
 //    @Bind(R.id.listview)
@@ -306,21 +306,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //
 //    }//getXmlData method....
 
-//    @Override
-//    public void afterTextChanged(Editable editable){
-//
-//    }
-//
-//    @Override
-//    public void beforeTextChanged(CharSequence charSequence, int start, int count, int after){
-//        //TODO Auto-generated method stub
-//    }
-//
-//    @Override
-//    public void onTextChanged(CharSequence charSequence, int start, int count, int after){
-//        adapter.getFilter().filter(charSequence);
-//    }
-
     public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
@@ -342,13 +327,13 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 while (evenType != XmlPullParser.END_DOCUMENT) {
                     switch (evenType) {
                         case XmlPullParser.START_DOCUMENT:
-                            items = new ArrayList<Recent>();
+                            mList = new ArrayList<Recent>();
                             break;
                         case XmlPullParser.END_DOCUMENT:
                             break;
                         case XmlPullParser.END_TAG:
                             if (parser.getName().equals("item") && bus != null) {
-                                items.add(bus);
+                                mList.add(bus);
                             }
                             break;
                         case XmlPullParser.START_TAG:
@@ -379,9 +364,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            //어답터 연결
-            recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
-            adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) items);
+            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
+            adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
             recyclerView.setAdapter(adapter);
         }
     }
