@@ -41,7 +41,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="20dp"
-            android:hint="약 이름을 입력해 주세요" />
+            android:hint="약 이름을 입력해 주세요"
+            android:privateImeOptions="defaultInputmode=korean"/>
 
         <Button
             android:id="@+id/textin_btn"

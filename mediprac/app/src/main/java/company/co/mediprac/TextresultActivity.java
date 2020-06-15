@@ -39,8 +39,10 @@ public class TextresultActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");//edit에서 받아옴
 
-        TextView inputword = (TextView)findViewById(R.id.inputword);//받아온 edit name을 나타냄
+        TextView inputword = (TextView)findViewById(R.id.inputword); //받아온 edit name을 나타냄
         inputword.setText(name);
+
+        String searchword = inputword.toString();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview_medlist);
         // use this setting to improve performance if you know that changes
