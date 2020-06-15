@@ -47,12 +47,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         notifyDataSetChanged();
     }
 
-
-//    public void updateList(List<Recent> list) {
-//        fList = list;
-//        notifyDataSetChanged();
-//    }
-
     @NonNull // 뷰 홀더는 각 리사이클러 뷰에 하나 이상으로 존재하게 되며, 각 한 줄을 표현
     @Override // 각 뷰 홀더는 어댑터에 의해 관리되며 이 객체는 RecyclerView.Adapter 객체
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -132,20 +126,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //        notifyDataSetChanged();
 //    }
 
-//    searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//        @Override
-//        public boolean onQueryTextSubmit(String query) {
-//            adapter.filter(query);
-//            return true;
-//        }
-//
-//        @Override
-//        public boolean onQueryTextChange(String newText) {
-//            adapter.filter(newText);
-//            return true;
-//        }
-//    });
-
 //    @Override
 //    public Filter getFilter() {
 //        return new Filter() {
@@ -171,17 +151,18 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //    }
 
 
-            public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
-                // each data item is just a string in this case
-                //public TextView textView;
-                public TextView ITEM_NAME;
-                public TextView ENTP_NAME;
+     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
+         // each data item is just a string in this case
+         //public TextView textView;
+         public TextView ITEM_NAME;
+         public TextView ENTP_NAME;
 
-                public MyViewHolder(View itemView) {
-                    super(itemView);
-                    ITEM_NAME = itemView.findViewById(R.id.item_name);
-                    ENTP_NAME = itemView.findViewById(R.id.entp_name);
-                }
+         public MyViewHolder(View itemView) {
+             super(itemView);
+             ITEM_NAME = itemView.findViewById(R.id.item_name);
+             ENTP_NAME = itemView.findViewById(R.id.entp_name);
+         }
+
 //        public MyViewHolder(TextView v) {
 //            super(v);
 //            textView = v.findViewById(R.id.result);
@@ -223,18 +204,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //    }
  }
 
-    //private String[] mDataset;
-
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
-
-
-    // Provide a suitable constructor (depends on the kind of dataset)
-//    public RecyclerviewAdapter(String[] myDataset) {// 생성자에서 데이터 리스트 객체를 전달받음.
-////        mDataset = myDataset;
-////    }
-
     // Create new views (invoked by the layout manager)
 //    @Override // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
 //    public RecyclerviewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -259,7 +228,3 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 //
 
 //}
-
-
-//package com.js.xmlpullparser_example;
-

@@ -9,7 +9,6 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,47 +23,41 @@ import java.util.List;
 
 public class TextresultActivity extends AppCompatActivity implements RecyclerviewAdapter.onItemListener {
 
-    private RecyclerviewAdapter adapter;
+    private List<Recent> items;
+    public String requestUrl;
+    Recent bus = null;
+    public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
     RecyclerView recyclerView;
-    //EditText edit;
-    LinearLayoutManager mLayoutManager;
+    private RecyclerviewAdapter adapter;
+    //LinearLayoutManager mLayoutManager;
+
     //ArrayList<Recent> items = null;
     //ArrayList<Recent> items = new ArrayList<>();
-    private List<Recent> itemList;
-
-    public String requestUrl;
-    ArrayList<Recent> items = null;
-    Recent bus = null;
+    //private List<Recent> itemList;
+    //ArrayList<Recent> items = null;
     XmlPullParser xpp;
-    public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
     String data;
 
-//    private RecyclerView.Adapter mAdapter;
-//    private RecyclerView.LayoutManager layoutManager;
+//  EditText edit;
+    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
 
-        setUpRecyclerView();
+        //setUpRecyclerView();
+        RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
+        recyclerView.setHasFixedSize(true);
+
+        layoutManager = new LinearLayoutManager(this);
+        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//        mLayoutManager = new LinearLayoutManager(getApplicationContext());
+//        recyclerView.setLayoutManager(mLayoutManager);
 
         // AsyncTask
-//        MyAsyncTask myAsyncTask = new MyAsyncTask();
-//        myAsyncTask.execute();
-
-//        void filter (String text) {
-//            List<Recent> temp = new ArrayList();
-//            for(Recent d: potionList){
-//                //or use .dqual(text) with you want equal match
-//                //use .toLowerCase() for better matches
-//                if(d.getITEM_NAME().contains(text)){
-//                    temp.add(d);
-//                }
-//            }
-//            //update recyclerview
-//            adapter.updateList(temp);
-//        }
+        MyAsyncTask myAsyncTask = new MyAsyncTask();
+        myAsyncTask.execute();
 
         //edit = (EditText)findViewById(R.id.edit);
         //edit.addTextChangedListener((TextWatcher) this);
@@ -107,27 +100,22 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //        });
     }
 
-    private void setUpRecyclerView() {
-        RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
-        recyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+//    private void setUpRecyclerView() {
+//        RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
+//        recyclerView.setHasFixedSize(true);
+//        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         //adapter = new RecyclerviewAdapter(this, items);
-//        itemList = new ArrayList<>();//샘플데이터
+        //items = new ArrayList<>();//샘플데이터
 //        fillData();
-
-        // specify an adapter (see also next example)
-        //mAdapter = new RecyclerviewAdapter(myDataset);
-        //recyclerView.setAdapter(mAdapter);
-
-        MyAsyncTask myAsyncTask = new MyAsyncTask();
-        myAsyncTask.execute();
 
 //        adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) itemList);
 //        recyclerView.setLayoutManager(layoutManager);
 //        recyclerView.setAdapter(adapter);
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+
+        //DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        //recyclerView.addItemDecoration(dividerItemDecoration);
+
         //adapter = new RecyclerviewAdapter(getApplicationContext(), item);
 
         //데이터셋 변경 시 adapter.dataSetChanged(exampleList);
@@ -142,10 +130,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
 //        recyclerView.setAdapter(adapter);
 //
-//
-//        mLayoutManager = new LinearLayoutManager(getApplicationContext());
-//        recyclerView.setLayoutManager(mLayoutManager);
-    }
+
+   // }
 
 //    private void fillData() {
 //        itemList = new ArrayList<>();
@@ -187,8 +173,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //    EditText editsearch;
 //    @Bind(R.id.Layout_Internet)
 //    RelativeLayout internetLayout;
-//
-
 
     //Button을 클릭했을 때 자동으로 호출되는 callback method....
 //    public void mOnClick(View v){
@@ -396,9 +380,9 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             //어답터 연결
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
-        RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), items);
-        recyclerView.setAdapter(adapter);
+            recyclerView = (RecyclerView)findViewById(R.id.recyclerview_medlist);
+            adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) items);
+            recyclerView.setAdapter(adapter);
         }
     }
 }

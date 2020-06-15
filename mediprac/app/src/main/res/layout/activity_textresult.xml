@@ -17,11 +17,11 @@
         android:text="텍스트 검색"
         android:textSize="50sp" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:orientation="horizontal"
-        android:weightSum="10">
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:orientation="horizontal"-->
+<!--        android:weightSum="10">-->
 
 <!--        <EditText-->
 <!--            android:id="@+id/edit"-->
@@ -37,12 +37,12 @@
 <!--            android:text="검색"-->
 <!--            android:textSize="18sp" />-->
 
-    </LinearLayout>
+<!--    </LinearLayout>-->
 
-    <SearchView
-        android:id="@+id/searchtext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+<!--    <SearchView-->
+<!--        android:id="@+id/searchtext"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_medlist"
