@@ -27,7 +27,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     public String requestUrl;
     Recent bus = null;
     public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
-    private RecyclerviewAdapter adapter;
+    //private RecyclerviewAdapter adapter;
 
     //LinearLayoutManager mLayoutManager;
 
@@ -155,6 +155,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
                 adapter.getFilter().filter(newText);
                 return false;
             }

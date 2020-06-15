@@ -18,8 +18,8 @@ import java.util.List;
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> implements Filterable {
 
     private List<Recent> filterList;
-    //private List<Recent> mList;
-    private ArrayList<Recent> mList;
+    private List<Recent> mList;
+    //private ArrayList<Recent> mList;
     //private ArrayList<Recent> filterList;
     //private static ArrayList<Recent> mList;
     private LayoutInflater mInflate;
@@ -28,13 +28,14 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
         //filterList = items;
-        //mList = new ArrayList<>(items);
 
         super();
 
         this.filterList = items;
         //this.mList = new ArrayList<>(items);
-        this.mList = items;
+        //this.mList = items;
+        mList = new ArrayList<>(items);
+
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
 //        mList = new ArrayList<Recent>();
@@ -62,8 +63,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     @Override // 뷰 홀더가 필요한 위치에 할당 될 때, 어댑터는 onBindViewHolder() 함수를 호출
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         //binding
-        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
-        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
+//        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
+//        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
 
         Recent currentitem = filterList.get(position);
         holder.ITEM_NAME.setText(currentitem.getITEM_NAME());
