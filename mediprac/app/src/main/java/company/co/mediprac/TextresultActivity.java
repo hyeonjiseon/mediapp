@@ -47,9 +47,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_textresult);
 
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-
         //setUpRecyclerView();
         //RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
         //recyclerView.setHasFixedSize(true);
@@ -152,6 +149,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -162,8 +160,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
                 Log.e("NEWTEXT",newText);
                 adapter.getFilter().filter(newText);
-                //return false;
-                return true;
+                return false;
+                //return true;
             }
         });
         return super.onCreateOptionsMenu(menu);
@@ -245,6 +243,16 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
+
+//            //데이터셋 변경 시
+            //adapter.dataSetChanged(filterList);
+//            //어댑터의 리스너 호출
+            //adapter.setOnClickListener(this);is
+
+             recyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext(), LinearLayoutManager.VERTICAL));
+             recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+             recyclerView.setAdapter(adapter);
+//
 
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(dividerItemDecoration);

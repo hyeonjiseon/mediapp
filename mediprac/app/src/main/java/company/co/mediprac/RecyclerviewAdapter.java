@@ -26,6 +26,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     private Context mContext;
     SearchView searchView;
 
+
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
         //filterList = items;
 
@@ -75,15 +76,15 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         holder.ITEM_NAME.setText(filterList.get(position).getITEM_NAME());
         holder.ENTP_NAME.setText(filterList.get(position).getENTP_NAME());
 
-//        if(mListener != null){
-//            final int pos = position;
-//            holder.itemView.setOnClickListener(new View.OnClickListener(){
-//                @Override
-//                public void onClick(View v){
-//                    mListener.onItemClicked(position);
-//                }
-//            });
-//        }
+        if(mListener != null){
+            final int pos = position;
+            holder.itemView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    mListener.onItemClicked(position);
+                }
+            });
+        }
     }
 
     public Filter getFilter(){
@@ -92,8 +93,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
     @Override // Return the size of your dataset (invoked by the layout manager)
     public int getItemCount() { //전체 아이템 갯수 리턴.
-        //return this.filterList.size();
-        return mList.size();
+        return this.filterList.size();
+        //return mList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
@@ -115,9 +116,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     }
 
      public Filter exampleFilter = new Filter() {
+
          @Override
          protected FilterResults performFiltering(CharSequence constraint) {
-             //filterList.clear();
              String charString = constraint.toString();
              Log.e("CHAR String", charString);
              if (charString.isEmpty()) {
@@ -126,26 +127,29 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                  ArrayList<Recent> filteringList = new ArrayList<>();
                 // Log.e("CHAR String222", charString);
                  for (Recent item : mList) {
-                     if (item.getITEM_NAME().contains(charString)) {//toLowerCase()., .toLowerCase()
+                     if (item.getITEM_NAME().contains(charString.trim())) {//toLowerCase()., .toLowerCase()
                          filteringList.add(item);
                      }
                  }
-                 Log.e("FilterlistLength", String.valueOf(filteringList.size()));
+                 Log.e("FilteringlistLength", String.valueOf(filteringList.size()));
                  filterList = filteringList;
+                 Log.e("FilterListLength", String.valueOf(filterList.size()));
              }
              FilterResults filterResults = new FilterResults();
              filterResults.values = filterList;
              return filterResults;
          }
         @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            //filterList.clear();
-            Log.e("CLEAR", String.valueOf(filterList));
-            //filterList.addAll((List) results.values);
+         protected void publishResults(CharSequence constraint, FilterResults results) {
+             //filterList.clear();
+             //Log.e("CLEAR", String.valueOf(filterList));
+             //filterList.addAll((List) results.values);
 
              filterList = (ArrayList<Recent>) results.values;
+             Log.e("final filterList", String.valueOf(filterList.size()));
+
              notifyDataSetChanged();
-        }
+         }
     };
 }
     // Create new views (invoked by the layout manager)
