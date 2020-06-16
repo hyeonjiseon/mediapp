@@ -1,6 +1,7 @@
 package company.co.mediprac;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -116,16 +117,20 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
      public Filter exampleFilter = new Filter() {
          @Override
          protected FilterResults performFiltering(CharSequence constraint) {
+             //filterList.clear();
              String charString = constraint.toString();
+             Log.e("CHAR String", charString);
              if (charString.isEmpty()) {
                  filterList = mList;
              } else {
                  ArrayList<Recent> filteringList = new ArrayList<>();
+                // Log.e("CHAR String222", charString);
                  for (Recent item : mList) {
-                     if (item.getITEM_NAME().toLowerCase().contains(charString.toLowerCase().trim())) {
+                     if (item.getITEM_NAME().contains(charString)) {//toLowerCase()., .toLowerCase()
                          filteringList.add(item);
                      }
                  }
+                 Log.e("FilterlistLength", String.valueOf(filteringList.size()));
                  filterList = filteringList;
              }
              FilterResults filterResults = new FilterResults();
@@ -134,8 +139,10 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
          }
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-//            filterList.clear();
-//            filterList.addAll((List) results.values);
+            //filterList.clear();
+            Log.e("CLEAR", String.valueOf(filterList));
+            //filterList.addAll((List) results.values);
+
              filterList = (ArrayList<Recent>) results.values;
              notifyDataSetChanged();
         }

@@ -2,6 +2,7 @@ package company.co.mediprac;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
@@ -159,6 +160,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             @Override
             public boolean onQueryTextChange(String newText) {
                 RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
+                Log.e("NEWTEXT",newText);
                 adapter.getFilter().filter(newText);
                 //return false;
                 return true;
