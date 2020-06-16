@@ -28,7 +28,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     public String requestUrl;
     Recent bus = null;
     public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
-    //private RecyclerviewAdapter adapter;
+    private RecyclerviewAdapter adapter;
 
     //LinearLayoutManager mLayoutManager;
     ArrayList<Recent> mList;
@@ -152,6 +152,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
             @Override
             public boolean onQueryTextSubmit(String query) {
+                RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
+                adapter.getFilter().filter(query);
                 return false;
             }
 
@@ -161,7 +163,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 Log.e("NEWTEXT",newText);
                 adapter.getFilter().filter(newText);
                 return false;
-                //return true;
             }
         });
         return super.onCreateOptionsMenu(menu);
@@ -169,6 +170,13 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_search) {
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
