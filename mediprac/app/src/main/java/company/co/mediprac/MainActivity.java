@@ -1,18 +1,24 @@
 package company.co.mediprac;
 
-import androidx.appcompat.app.AppCompatActivity;
-//import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+//import android.app.Activity;
+
 public class MainActivity extends AppCompatActivity {
+    private  static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        MainActivity.context = getApplicationContext();
 
         Button button_search = findViewById(R.id.button);
         button_search.setOnClickListener(new View.OnClickListener() {
@@ -33,5 +39,8 @@ public class MainActivity extends AppCompatActivity {
 //                startActivity(intent); // 다음 화면으로 넘어간다
 //            }
 //        });
+    }
+    public static Context getAppContext() {
+        return MainActivity.context;
     }
 }
