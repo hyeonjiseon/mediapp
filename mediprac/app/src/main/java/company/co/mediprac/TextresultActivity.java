@@ -152,14 +152,14 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
+                //adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
                 adapter.getFilter().filter(query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
+                //RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
                 Log.e("NEWTEXT",newText);
                 adapter.getFilter().filter(newText);
                 return false;
@@ -244,7 +244,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             RecyclerView recyclerView = findViewById(R.id.recyclerview_medlist);
-            RecyclerviewAdapter adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
+            adapter = new RecyclerviewAdapter(getApplicationContext(), (ArrayList<Recent>) mList);
             recyclerView.setAdapter(adapter);
 
             recyclerView.setHasFixedSize(true);
