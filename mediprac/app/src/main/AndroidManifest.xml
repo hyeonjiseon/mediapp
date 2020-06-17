@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="company.co.mediprac">
 
+    <uses-permission android:name="android.permission.CAMERA"></uses-permission> <!--카메라 권한-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>    <!--저장소 읽기 권한-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>    <!--저장소 쓰기 권한-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
