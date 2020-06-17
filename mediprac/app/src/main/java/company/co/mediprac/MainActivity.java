@@ -1,6 +1,5 @@
 package company.co.mediprac;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private  static Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
