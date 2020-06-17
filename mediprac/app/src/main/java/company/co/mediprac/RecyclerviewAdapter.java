@@ -17,30 +17,18 @@ import java.util.ArrayList;
 
 public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapter.MyViewHolder> implements Filterable {
 
-    //private List<Recent> filterList;
-    //private List<Recent> mList;
     private ArrayList<Recent> mList;
     private ArrayList<Recent> filterList;
-    //private static ArrayList<Recent> mList;
     private LayoutInflater mInflate;
     private Context mContext;
     SearchView searchView;
 
 
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
-        //filterList = items;
-
-        //super();
-
         this.filterList = items;
-        //this.mList = new ArrayList<>(items);
         this.mList = items;
-        //mList = new ArrayList<>(items);
-
         this.mInflate = LayoutInflater.from(context);
         this.mContext = context;
-//        mList = new ArrayList<Recent>();
-//        mList.addAll(filterList);
     }
 
     @Override
@@ -59,20 +47,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         notifyDataSetChanged();
     }
 
-//    @NonNull // 뷰 홀더는 각 리사이클러 뷰에 하나 이상으로 존재하게 되며, 각 한 줄을 표현
-//    @Override // 각 뷰 홀더는 어댑터에 의해 관리되며 이 객체는 RecyclerView.Adapter 객체
-//    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        View view = mInflate.inflate(R.layout.item, parent, false);
-//        MyViewHolder viewHolder = new MyViewHolder(view);
-//        return viewHolder;
-//    } // 어댑터라는 존재가 필요한 만큼 뷰 홀더를 생성하고, 뷰 홀더안에 표시할 데이터와 연결
-
     @Override // 뷰 홀더가 필요한 위치에 할당 될 때, 어댑터는 onBindViewHolder() 함수를 호출
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        //binding
-//        holder.ITEM_NAME.setText(mList.get(position).ITEM_NAME);
-//        holder.ENTP_NAME.setText(mList.get(position).ENTP_NAME);
-
         holder.ITEM_NAME.setText(filterList.get(position).getITEM_NAME());
         holder.ENTP_NAME.setText(filterList.get(position).getENTP_NAME());
 
@@ -94,14 +70,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     @Override // Return the size of your dataset (invoked by the layout manager)
     public int getItemCount() { //전체 아이템 갯수 리턴.
         return this.filterList.size();
-        //return mList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
-         // each data item is just a string in this case
-         //public TextView textView;
-//         public TextView ITEM_NAME;
-//         public TextView ENTP_NAME;
         private TextView ITEM_NAME, ENTP_NAME;
 
          public MyViewHolder(View itemView) {
@@ -141,10 +112,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
          }
         @Override
          protected void publishResults(CharSequence constraint, FilterResults results) {
-             //filterList.clear();
-             //Log.e("CLEAR", String.valueOf(filterList));
-             //filterList.addAll((List) results.values);
-
              filterList = (ArrayList<Recent>) results.values;
              Log.e("final filterList", String.valueOf(filterList.size()));
 
@@ -152,16 +119,3 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
          }
     };
 }
-    // Create new views (invoked by the layout manager)
-//    @Override // onCreateViewHolder() - 아이템 뷰를 위한 뷰홀더 객체 생성하여 리턴.
-//    public RecyclerviewAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//        //viewType 형태의 아이템 뷰를 위한 뷰홀더 객체 생성.
-//        // create a new view
-//
-//        TextView text = (TextView)LayoutInflater.from(parent.getContext())
-//                .inflate(R.layout.item, parent, false);
-//
-//        MyViewHolder vh = new MyViewHolder(text);
-//        return vh;
-//    }
-//}
