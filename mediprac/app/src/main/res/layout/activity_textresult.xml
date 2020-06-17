@@ -17,33 +17,6 @@
         android:text="텍스트 검색"
         android:textSize="50sp" />
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:orientation="horizontal"-->
-<!--        android:weightSum="10">-->
-
-<!--        <EditText-->
-<!--            android:id="@+id/edit"-->
-<!--            android:layout_width="250dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:hint="약 이름을 입력해 주세요" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/button"-->
-<!--            android:layout_width="100dp"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:onClick="mOnClick"-->
-<!--            android:text="검색"-->
-<!--            android:textSize="18sp" />-->
-
-<!--    </LinearLayout>-->
-
-<!--    <SearchView-->
-<!--        android:id="@+id/searchtext"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content" />-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_medlist"
         android:layout_width="match_parent"
