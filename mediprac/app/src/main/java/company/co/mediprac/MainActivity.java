@@ -20,12 +20,21 @@ public class MainActivity extends AppCompatActivity {
 
         MainActivity.context = getApplicationContext();
 
-        Button button_search = findViewById(R.id.button);
+        Button button_search = findViewById(R.id.button1);
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent_search = new Intent(getApplicationContext(), SearchActivity.class);
                 startActivity(intent_search);
+            }
+        });
+
+        Button button2 = findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent_medimorning = new Intent(getApplicationContext(), BreakfastActivity.class);
+                startActivity(intent_medimorning);
             }
         });
 
