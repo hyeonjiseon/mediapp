@@ -274,7 +274,7 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
         mDataPath = getFilesDir() + "/tesseract/";
 
         //트레이닝데이터가 카피되어 있는지 체크
-        String lang = "";
+        String lang = "kor";
         for (String Language : mLanguageList) {
             checkFile(new File(mDataPath + "tessdata/"), Language);
             lang += Language + "+";
