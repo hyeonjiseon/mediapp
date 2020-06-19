@@ -271,7 +271,8 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
 
     public void Tesseract() {
         //언어파일 경로
-        mDataPath = getFilesDir() + "/tesseract/";
+        //mDataPath = getFilesDir() + "/tesseract/";
+        mDataPath = Environment.getExternalStorageDirectory() + "/tesseract/";
 
         //트레이닝데이터가 카피되어 있는지 체크
         String lang = "kor";
@@ -439,6 +440,23 @@ public class BreakfastActivity extends AppCompatActivity implements View.OnClick
         m_Tess = new TessBaseAPI();
         m_Tess.init(mDataPath, lang);
     }
+
+//    public boolean init(String datapath, String language) {
+//        if (datapath == null) {
+//            throw new IllegalArgumentException("Data path must not be null!");
+//        }
+//        if (!datapath.endsWith(File.separator)) {
+//            datapath += File.separator;
+//        }
+//
+//        File tessdata = new File(datapath + "tessdata");
+//        if (!tessdata.exists() || !tessdata.isDirectory()) {
+//            throw new IllegalArgumentException("Data path must contain subfolder tessdata!");
+//        }
+//
+//        return nativeInit(datapath, language);
+//    }
+
     private void copyFiles2(String lang) {
         try {
             //location we want the file to be at
