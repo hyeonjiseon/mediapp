@@ -23,8 +23,8 @@ public class SearchinfoActivity extends AppCompatActivity {
         String ETC_OTC_CODE = getIntent().getStringExtra("etc_otc_code");
         String ITEM_PERMIT_DATE = getIntent().getStringExtra("item_permit_date");
         Log.e("item_permit_date", ITEM_PERMIT_DATE);
-        String ENTP_NO = getIntent().getStringExtra("entp_no");
-        Log.e("entp_no", ENTP_NO);
+        String ENTP_NO = getIntent().getStringExtra("ENTP_NO");
+        Log.e("ENTP_NO", ENTP_NO);
         String BAR_CODE = getIntent().getStringExtra("bar_code");
         String ITEM_SEQ = getIntent().getStringExtra("item_seq");
         String CHART = getIntent().getStringExtra("chart");
@@ -38,6 +38,9 @@ public class SearchinfoActivity extends AppCompatActivity {
         String INDUTY_TYPE = getIntent().getStringExtra("INDUTY_TYPE");
         String CHANGE_DATE = getIntent().getStringExtra("CHANGE_DATE");
         String INGR_NAME = getIntent().getStringExtra("INGR_NAME");
+
+        String EE_DOC_ID = getIntent().getStringExtra("EE_DOC_ID");
+        Log.e("EE_DOC_ID", EE_DOC_ID);
 
     }
 }

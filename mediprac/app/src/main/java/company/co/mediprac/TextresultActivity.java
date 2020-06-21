@@ -103,7 +103,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 boolean b_CHANGE_DATE = false;
                 boolean b_INGR_NAME = false;
 
-               // boolean b_CHART = false;
+                boolean b_EE_DOC_ID = false;
 
 
 
@@ -148,6 +148,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("INDUTY_TYPE")) b_INDUTY_TYPE = true;
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
+                            if (parser.getName().equals("EE_DOC_ID")) b_EE_DOC_ID = true;
 
                             break;
 
@@ -200,6 +201,9 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             } else if (b_INGR_NAME) {
                                 bus.setINGR_NAME(parser.getText());
                                 b_INGR_NAME = false;
+                            } else if (b_EE_DOC_ID) {
+                                bus.setEE_DOC_ID(parser.getText());
+                                b_EE_DOC_ID = false;
                             }
                             break;
                     }
