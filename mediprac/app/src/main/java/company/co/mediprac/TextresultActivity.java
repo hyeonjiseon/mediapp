@@ -90,6 +90,22 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 boolean b_ENTP_NAME = false;
                 boolean b_ETC_OTC_CODE = false;
                 boolean b_ITEM_PERMIT_DATE = false;
+                boolean b_ENTP_NO = false;
+                boolean b_BAR_CODE = false;
+                boolean b_ITEM_SEQ = false;
+                boolean b_CHART = false;
+                boolean b_MATERIAL_NAME = false;
+                boolean b_PACK_UNIT = false;
+                boolean b_PERMIT_KIND_NAME = false;
+                boolean b_CANCEL_DATE = false;
+                boolean b_MAKE_MATERIAL_FLAG = false;
+                boolean b_INDUTY_TYPE = false;
+                boolean b_CHANGE_DATE = false;
+                boolean b_INGR_NAME = false;
+
+               // boolean b_CHART = false;
+
+
 
                 URL url = new URL(requestUrl);
                 InputStream is = url.openStream();
@@ -120,7 +136,21 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
                             if (parser.getName().equals("ETC_OTC_CODE")) b_ETC_OTC_CODE = true;
                             if (parser.getName().equals("ITEM_PERMIT_DATE")) b_ITEM_PERMIT_DATE = true;
+                            if (parser.getName().equals("ENTP_NO")) b_ENTP_NO = true;
+                            if (parser.getName().equals("BAR_CODE")) b_BAR_CODE = true;
+                            if (parser.getName().equals("ITEM_SEQ")) b_ITEM_SEQ = true;
+                            if (parser.getName().equals("CHART")) b_CHART = true;
+                            if (parser.getName().equals("MATERIAL_NAME")) b_MATERIAL_NAME = true;
+                            if (parser.getName().equals("PACK_UNIT")) b_PACK_UNIT = true;
+                            if (parser.getName().equals("PERMIT_KIND_NAME")) b_BAR_CODE = true;
+                            if (parser.getName().equals("CANCEL_DATE")) b_BAR_CODE = true;
+                            if (parser.getName().equals("MAKE_MATERIAL_FLAG")) b_MAKE_MATERIAL_FLAG = true;
+                            if (parser.getName().equals("INDUTY_TYPE")) b_INDUTY_TYPE = true;
+                            if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
+                            if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
+
                             break;
+
                         case XmlPullParser.TEXT:
                             if (b_ITEM_NAME) {
                                 bus.setITEM_NAME(parser.getText());
@@ -131,6 +161,45 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             } else if (b_ETC_OTC_CODE) {
                                 bus.setETC_OTC_CODE(parser.getText());
                                 b_ETC_OTC_CODE = false;
+                            } else if (b_ITEM_PERMIT_DATE) {
+                                bus.setITEM_PERMIT_DATE(parser.getText());
+                                b_ITEM_PERMIT_DATE = false;
+                            } else if (b_ENTP_NO) {
+                                bus.setENTP_NO(parser.getText());
+                                b_ENTP_NO = false;
+                            } else if (b_BAR_CODE) {
+                                bus.setBAR_CODE(parser.getText());
+                                b_BAR_CODE = false;
+                            } else if (b_ITEM_SEQ) {
+                                bus.setITEM_SEQ(parser.getText());
+                                b_ITEM_SEQ = false;
+                            } else if (b_CHART) {
+                                bus.setCHART(parser.getText());
+                                b_CHART = false;
+                            } else if (b_MATERIAL_NAME) {
+                                bus.setMATERIAL_NAME(parser.getText());
+                                b_MATERIAL_NAME = false;
+                            } else if (b_PACK_UNIT) {
+                                bus.setPACK_UNIT(parser.getText());
+                                b_PACK_UNIT = false;
+                            } else if (b_PERMIT_KIND_NAME) {
+                                bus.setPERMIT_KIND_NAME(parser.getText());
+                                b_PERMIT_KIND_NAME = false;
+                            } else if (b_CANCEL_DATE) {
+                                bus.setCANCEL_DATE(parser.getText());
+                                b_CANCEL_DATE = false;
+                            } else if (b_MAKE_MATERIAL_FLAG) {
+                                bus.setMAKE_MATERIAL_FLAG(parser.getText());
+                                b_MAKE_MATERIAL_FLAG = false;
+                            } else if (b_INDUTY_TYPE) {
+                                bus.setINDUTY_TYPE(parser.getText());
+                                b_INDUTY_TYPE = false;
+                            } else if (b_CHANGE_DATE) {
+                                bus.setCHANGE_DATE(parser.getText());
+                                b_CHANGE_DATE = false;
+                            } else if (b_INGR_NAME) {
+                                bus.setINGR_NAME(parser.getText());
+                                b_INGR_NAME = false;
                             }
                             break;
                     }

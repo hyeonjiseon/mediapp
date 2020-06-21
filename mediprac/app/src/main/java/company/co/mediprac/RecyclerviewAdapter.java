@@ -92,10 +92,24 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                      Recent arrayitem = filterList.get(pos);
 
                      Intent infointent = new Intent(mContext, SearchinfoActivity.class);
+
                      infointent.putExtra("item_name", arrayitem.getITEM_NAME());
                      infointent.putExtra("entp_name", arrayitem.getENTP_NAME());
                      infointent.putExtra("etc_otc_code", arrayitem.getETC_OTC_CODE());
                      infointent.putExtra("item_permit_date", arrayitem.getITEM_PERMIT_DATE());
+                     infointent.putExtra("ENTP_NO", arrayitem.getENTP_NO());
+                     infointent.putExtra("bar_code", arrayitem.getBAR_CODE());
+                     infointent.putExtra("item_seq", arrayitem.getITEM_SEQ());
+                     infointent.putExtra("chart", arrayitem.getCHART());
+                     infointent.putExtra("material_name", arrayitem.getMATERIAL_NAME());
+                     infointent.putExtra("PACK_UNIT", arrayitem.getPACK_UNIT());
+                     infointent.putExtra("PERMIT_KIND_NAME", arrayitem.getPERMIT_KIND_NAME());
+                     infointent.putExtra("CANCEL_DATE", arrayitem.getCANCEL_DATE());
+                     infointent.putExtra("MAKE_MATERIAL_FLAG", arrayitem.getMAKE_MATERIAL_FLAG());
+                     infointent.putExtra("INDUTY_TYPE", arrayitem.getINDUTY_TYPE());
+                     infointent.putExtra("CHANGE_DATE", arrayitem.getCHANGE_DATE());
+                     infointent.putExtra("INGR_NAME", arrayitem.getINGR_NAME());
+
                      mContext.startActivity(infointent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                  }
              });
