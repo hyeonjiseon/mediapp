@@ -83,10 +83,12 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey=" + key;
+            //requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
+                boolean b_ETC_OTC_CODE = false;
 
                 URL url = new URL(requestUrl);
                 InputStream is = url.openStream();
@@ -115,6 +117,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             }
                             if (parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
                             if (parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
+                            if (parser.getName().equals("ETC_OTC_CODE")) b_ETC_OTC_CODE = true;
                             break;
                         case XmlPullParser.TEXT:
                             if (b_ITEM_NAME) {
@@ -123,6 +126,9 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             } else if (b_ENTP_NAME) {
                                 bus.setENTP_NAME(parser.getText());
                                 b_ENTP_NAME = false;
+                            } else if (b_ETC_OTC_CODE) {
+                                bus.setETC_OTC_CODE(parser.getText());
+                                b_ETC_OTC_CODE = false;
                             }
                             break;
                     }

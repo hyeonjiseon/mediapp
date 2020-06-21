@@ -51,6 +51,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         holder.ITEM_NAME.setText(filterList.get(position).getITEM_NAME());
         holder.ENTP_NAME.setText(filterList.get(position).getENTP_NAME());
+        holder.ETC_OTC_CODE.setText(filterList.get(position).getETC_OTC_CODE());
 
         if(mListener != null){
             final int pos = position;
@@ -73,12 +74,13 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
-        private TextView ITEM_NAME, ENTP_NAME;
+        private TextView ITEM_NAME, ENTP_NAME, ETC_OTC_CODE;
 
          public MyViewHolder(View itemView) {
              super(itemView);
              ITEM_NAME = itemView.findViewById(R.id.item_name);
              ENTP_NAME = itemView.findViewById(R.id.entp_name);
+             ETC_OTC_CODE = itemView.findViewById(R.id.etc_otc_code);
          }
     }
 
