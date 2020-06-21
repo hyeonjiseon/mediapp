@@ -3,24 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FDFDFD">
+    android:layout_height="wrap_content"
+    android:background="#FDFDFD"
+    android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/editText4"
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="117dp"
+        android:layout_height="80dp"
+        android:layout_margin="10dp"
         android:layout_weight="1"
-        android:ems="10"
+        android:foregroundGravity="center"
         android:gravity="center"
-        android:inputType="textPersonName"
         android:text="검색 결과"
+        android:textSize="35dp" />
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="제품명"
+        android:textColor="@color/colorAccent"
         android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="642dp"
         android:layout_weight="1"
         android:orientation="vertical">
 
