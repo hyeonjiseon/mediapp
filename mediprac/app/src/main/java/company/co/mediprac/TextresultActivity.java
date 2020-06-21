@@ -148,7 +148,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("INDUTY_TYPE")) b_INDUTY_TYPE = true;
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
-                            if (parser.getName().equals("EE_DOC_ID")) b_EE_DOC_ID = true;
+                            if (parser.getName().equals("EE_DOC_DATA")) b_EE_DOC_ID = true;
 
                             break;
 
@@ -202,10 +202,17 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                                 bus.setINGR_NAME(parser.getText());
                                 b_INGR_NAME = false;
                             } else if (b_EE_DOC_ID) {
-                                bus.setEE_DOC_ID(parser.getText());
-                                b_EE_DOC_ID = false;
+                                parser.next();
+                                if(parser.getName().equals("DOC title=\"효능효과\" type=\"EE\"")){
+                                    parser.next();
+                                    if(parser.getName().equals("SECTION title=\"\"")){
+                                        bus.setEE_DOC_ID(parser.getText());
+                                        b_EE_DOC_ID = false;
+                                        break;
+                                    }
+                                }
                             }
-                            break;
+                            //break;
                     }
                     eventType = parser.next();
                 }

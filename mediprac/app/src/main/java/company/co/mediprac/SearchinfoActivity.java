@@ -17,7 +17,7 @@ public class SearchinfoActivity extends AppCompatActivity {
         Log.e("ITEM_NAME", ITEM_NAME);
 
         TextView textView = (TextView)findViewById(R.id.item_name);
-        textView.setText(ITEM_NAME);
+
 
         String ENTP_NAME = getIntent().getStringExtra("entp_name");
         String ETC_OTC_CODE = getIntent().getStringExtra("etc_otc_code");
@@ -41,6 +41,8 @@ public class SearchinfoActivity extends AppCompatActivity {
 
         String EE_DOC_ID = getIntent().getStringExtra("EE_DOC_ID");
         Log.e("EE_DOC_ID", EE_DOC_ID);
+
+        textView.setText(EE_DOC_ID);
 
     }
 }
