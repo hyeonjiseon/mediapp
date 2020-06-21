@@ -1,6 +1,7 @@
 package company.co.mediprac;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,14 +74,28 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
         return this.filterList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
+    public class MyViewHolder extends RecyclerView.ViewHolder { // 아이템 뷰를 저장하는 뷰홀더 클래스.
         private TextView ITEM_NAME, ENTP_NAME, ETC_OTC_CODE;
+        View v;
 
          public MyViewHolder(View itemView) {
              super(itemView);
              ITEM_NAME = itemView.findViewById(R.id.item_name);
              ENTP_NAME = itemView.findViewById(R.id.entp_name);
              ETC_OTC_CODE = itemView.findViewById(R.id.etc_otc_code);
+             v = itemView;
+
+             itemView.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View v) {
+                     int pos = getAdapterPosition();
+                     Recent arrayitem = filterList.get(pos);
+                     Intent infointent = new Intent(mContext, SearchinfoActivity.class);
+                     mContext.startActivity(infointent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                 }
+             });
+
+
          }
     }
 
