@@ -18,7 +18,7 @@ public class Recent {
     String INDUTY_TYPE;//업종구분
     String CHANGE_DATE;//변경일자
     String INGR_NAME;//첨가제
-    String EE_DOC_ID;//효능효과
+    String EE_DOC_DATA;//효능효과
 
     public String getITEM_NAME() { return ITEM_NAME; }
     public String getENTP_NAME() { return ENTP_NAME; }
@@ -37,7 +37,7 @@ public class Recent {
     public String getCHANGE_DATE() { return CHANGE_DATE; }
     public String getINGR_NAME() { return INGR_NAME; }
 
-    public String getEE_DOC_ID() { return EE_DOC_ID; }
+    public String getEE_DOC_DATA() { return EE_DOC_DATA; }
 
     public void setITEM_NAME(String ITEM_NAME) { this.ITEM_NAME = ITEM_NAME; }
     public void setENTP_NAME(String ENTP_NAME) { this.ENTP_NAME = ENTP_NAME; }
@@ -56,7 +56,7 @@ public class Recent {
     public void setCHANGE_DATE(String CHANGE_DATE) { this.CHANGE_DATE = CHANGE_DATE; }
     public void setINGR_NAME(String INGR_NAME) { this.INGR_NAME = INGR_NAME; }
 
-    public void setEE_DOC_ID(String EE_DOC_ID) { this.EE_DOC_ID = EE_DOC_ID; }
+    public void setEE_DOC_DATA(String EE_DOC_DATA) { this.EE_DOC_DATA = EE_DOC_DATA; }
 
 
 

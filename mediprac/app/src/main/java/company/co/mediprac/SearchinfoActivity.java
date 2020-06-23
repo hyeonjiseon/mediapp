@@ -39,10 +39,10 @@ public class SearchinfoActivity extends AppCompatActivity {
         String CHANGE_DATE = getIntent().getStringExtra("CHANGE_DATE");
         String INGR_NAME = getIntent().getStringExtra("INGR_NAME");
 
-        String EE_DOC_ID = getIntent().getStringExtra("EE_DOC_ID");
-        Log.e("EE_DOC_ID", EE_DOC_ID);
+        String EE_DOC_DATA = getIntent().getStringExtra("EE_DOC_DATA");
+        Log.e("EE_DOC_DATA", EE_DOC_DATA);
 
-        textView.setText(EE_DOC_ID);
+        textView.setText(EE_DOC_DATA);
 
     }
 }

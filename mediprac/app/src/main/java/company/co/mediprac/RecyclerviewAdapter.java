@@ -109,7 +109,7 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                      infointent.putExtra("INDUTY_TYPE", arrayitem.getINDUTY_TYPE());
                      infointent.putExtra("CHANGE_DATE", arrayitem.getCHANGE_DATE());
                      infointent.putExtra("INGR_NAME", arrayitem.getINGR_NAME());
-                     infointent.putExtra("EE_DOC_ID", arrayitem.getEE_DOC_ID());
+                     infointent.putExtra("EE_DOC_DATA", arrayitem.getEE_DOC_DATA());
 
                      mContext.startActivity(infointent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                  }
