@@ -101,15 +101,23 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
         String link = "";
         parser.require(XmlPullParser.START_TAG, "", "EE_DOC_DATA");
+        parser.next();
         String tag = parser.getName();
         String relType = parser.getAttributeValue(null, "title");
         if (tag.equals("DOC")) {
             if (relType.equals("효능효과")){
-                link = parser.getAttributeValue(null, "type");
+                parser.next();
+                parser.next();
+                String tag2 = parser.getName();
+                if(tag2.equals("ARTICLE")){
+                    link = parser.getAttributeValue(0);
+                }
+                parser.nextTag();
+                parser.nextTag();
                 parser.nextTag();
             }
         }
-        parser.require(XmlPullParser.END_TAG, "", "DOC");
+        parser.require(XmlPullParser.END_TAG, "", "EE_DOC_DATA");
         return link;
     }
 
@@ -166,7 +174,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
                             if (parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
                             if (parser.getName().equals("ETC_OTC_CODE")) b_ETC_OTC_CODE = true;
-                            if (parser.getName().equals("ITEM_PERMIT_DATE")) b_ITEM_PERMIT_DATE = true;
+                            if (parser.getName().equals("ITEM_PERMIT_DATE"))
+                                b_ITEM_PERMIT_DATE = true;
                             if (parser.getName().equals("ENTP_NO")) b_ENTP_NO = true;
                             if (parser.getName().equals("BAR_CODE")) b_BAR_CODE = true;
                             if (parser.getName().equals("ITEM_SEQ")) b_ITEM_SEQ = true;
@@ -175,23 +184,28 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("PACK_UNIT")) b_PACK_UNIT = true;
                             if (parser.getName().equals("PERMIT_KIND_NAME")) b_BAR_CODE = true;
                             if (parser.getName().equals("CANCEL_DATE")) b_BAR_CODE = true;
-                            if (parser.getName().equals("MAKE_MATERIAL_FLAG")) b_MAKE_MATERIAL_FLAG = true;
+                            if (parser.getName().equals("MAKE_MATERIAL_FLAG"))
+                                b_MAKE_MATERIAL_FLAG = true;
                             if (parser.getName().equals("INDUTY_TYPE")) b_INDUTY_TYPE = true;
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
+                            //if (parser.getName().equals("EE_DOC_DATA")) b_EE_DOC_DATA = true;
 
                             if (parser.getName().equals("EE_DOC_DATA")){
-                                while (parser.next() != XmlPullParser.END_TAG) {
-                                    if (parser.getEventType() != XmlPullParser.START_TAG) {
-                                        continue;
-                                    }
-                                    String name = parser.getName();
-                                    if (name.equals("DOC")) {
-                                        bus.setEE_DOC_DATA(readLink(parser));
-                                    } else {
-                                        skip(parser);
-                                    }
-                                }
+
+
+//                                while (parser.next() != XmlPullParser.END_TAG) {
+//                                    if (parser.getEventType() != XmlPullParser.START_TAG) {
+//                                        continue;
+//                                    }
+//                                    String name = parser.getName();
+//                                    if (name.equals("DOC")) {
+//
+//                                    } else {
+//                                        skip(parser);
+//                                    }
+//                                }
+                                bus.setEE_DOC_DATA(readLink(parser));
                             }
 
 //                            if(parser.getAttributeName(0).equals("title")){
@@ -265,6 +279,9 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                                 b_INGR_NAME = false;
                             }
 //                            else if (b_EE_DOC_DATA) {
+//                                bus.setEE_DOC_DATA(parser.getText());
+//                                b_EE_DOC_DATA = false;
+//                            }
 //                                //bus.setEE_DOC_DATA(readEffect(parser));
 //                                //bus.setEE_DOC_DATA(parser.getName());
 //                                bus.setEE_DOC_DATA(parser.getAttributeValue(0));
@@ -278,11 +295,10 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //                                        b_EE_DOC_DATA = false;
 //                                        break;
 //                                    }
-                               // }
-                            }
                             break;
                     }
                     eventType = parser.next();
+                    }
 
             } catch (Exception e) {
                 e.printStackTrace();
