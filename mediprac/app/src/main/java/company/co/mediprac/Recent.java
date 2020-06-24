@@ -20,6 +20,7 @@ public class Recent {
     String INGR_NAME;//첨가제
     String EE_DOC_DATA;//효능효과
 
+
     public String getITEM_NAME() { return ITEM_NAME; }
     public String getENTP_NAME() { return ENTP_NAME; }
     public String getETC_OTC_CODE() { return ETC_OTC_CODE; }

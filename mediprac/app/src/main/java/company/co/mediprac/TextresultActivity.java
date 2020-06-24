@@ -14,8 +14,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -79,11 +81,42 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         Toast.makeText(this, "클릭" + position, Toast.LENGTH_SHORT).show();
     }
 
+    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
+        if (parser.getEventType() != XmlPullParser.START_TAG) {
+            throw new IllegalStateException();
+        }
+        int depth = 1;
+        while (depth != 0) {
+            switch (parser.next()) {
+                case XmlPullParser.END_TAG:
+                    depth--;
+                    break;
+                case XmlPullParser.START_TAG:
+                    depth++;
+                    break;
+            }
+        }
+    }
+
+    private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
+        String link = "";
+        parser.require(XmlPullParser.START_TAG, "", "EE_DOC_DATA");
+        String tag = parser.getName();
+        String relType = parser.getAttributeValue(null, "title");
+        if (tag.equals("DOC")) {
+            if (relType.equals("효능효과")){
+                link = parser.getAttributeValue(null, "type");
+                parser.nextTag();
+            }
+        }
+        parser.require(XmlPullParser.END_TAG, "", "DOC");
+        return link;
+    }
+
     public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
-            //requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductList?&ServiceKey=" + key;
             requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
@@ -146,7 +179,38 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("INDUTY_TYPE")) b_INDUTY_TYPE = true;
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
-                            if (parser.getName().equals("EE_DOC_DATA")) b_EE_DOC_DATA = true;
+
+                            if (parser.getName().equals("EE_DOC_DATA")){
+                                while (parser.next() != XmlPullParser.END_TAG) {
+                                    if (parser.getEventType() != XmlPullParser.START_TAG) {
+                                        continue;
+                                    }
+                                    String name = parser.getName();
+                                    if (name.equals("DOC")) {
+                                        bus.setEE_DOC_DATA(readLink(parser));
+                                    } else {
+                                        skip(parser);
+                                    }
+                                }
+                            }
+
+//                            if(parser.getAttributeName(0).equals("title")){
+//                                bus.setEE_DOC_DATA(parser.getAttributeValue(0));
+//                            }else{
+//                                Log.e("error2", "EE_DOC_DATA getattributeNAme error");
+//                            }
+
+//                            if (parser.getName().equals("EE_DOC_DATA")) {
+//                                parser.next();
+//                                if(parser.getAttributeName(0).equals("title")){
+//                                    bus.setEE_DOC_DATA(parser.getAttributeValue(0));
+//                                }else{
+//                                    Log.e("error2", "EE_DOC_DATA getattributeNAme error");
+//                                }
+//                            } else{
+//                                Log.e("error1", "EE_DOC_DATA getNAme error");
+//                            }
+
 
                             break;
 
@@ -199,18 +263,24 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             } else if (b_INGR_NAME) {
                                 bus.setINGR_NAME(parser.getText());
                                 b_INGR_NAME = false;
-                            } else if (b_EE_DOC_DATA) {
-                                //parser.next();
-                                if(parser.getAttributeName(0).equals("DOC title=")){
-                                    //parser.next();
-                                    //if(parser.getAttributeValue(1).equals("Article title=")){
-                                        bus.setEE_DOC_DATA(parser.getText());
-                                        b_EE_DOC_DATA = false;
-                                        break;
-                                    }
-                                }
                             }
-                            //break;
+//                            else if (b_EE_DOC_DATA) {
+//                                //bus.setEE_DOC_DATA(readEffect(parser));
+//                                //bus.setEE_DOC_DATA(parser.getName());
+//                                bus.setEE_DOC_DATA(parser.getAttributeValue(0));
+//                                b_EE_DOC_DATA = false;
+
+//                                //parser.next();
+//                                if(parser.getAttributeName(0).equals("DOC title=")){
+//                                    //parser.next();
+//                                    //if(parser.getAttributeValue(1).equals("Article title=")){
+//                                        bus.setEE_DOC_DATA(parser.getText());
+//                                        b_EE_DOC_DATA = false;
+//                                        break;
+//                                    }
+                               // }
+                            }
+                            break;
                     }
                     eventType = parser.next();
 
@@ -233,5 +303,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             recyclerView.setLayoutManager(layoutManager);
         }
     }
+
 }
 
