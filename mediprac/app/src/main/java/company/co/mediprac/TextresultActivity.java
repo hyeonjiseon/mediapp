@@ -95,13 +95,10 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             Log.d("start", start);
 
             if (start.equals("SECTION")){
-                if(parser.getAttributeValue(0) == null){
-                    continue;
-                } else if (parser.getAttributeValue(0) != null){
+                if(parser.getAttributeValue(0) != null){
                     String sec = parser.getAttributeValue(0);
                     Log.d("sec", sec);
                     link = link + sec;
-
                 }
             } else if (start.equals("ARTICLE")){
                 String ti = parser.getAttributeValue(0);//ARTICLE first line
@@ -117,17 +114,36 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                     String tag2 = parser.nextText();//paragraph 내용
                     Log.d("art para", tag2);
                     link = link + tag2;
-//                    parser.nextTag();
-//                    String check2 = parser.getName();
-//                    Log.d("check2", check2);
+
+                    parser.nextTag();
+                    String tag3 = parser.getName();
+                    Log.d("tag3", tag3);
+
+                    if(tag3.equals("PARAGRAPH")){
+                        String tag4 = parser.nextText();//paragraph 내용
+                        Log.d("art para para", tag4);
+                        link = link + tag4;
+                    }
                 }
 
-            } else if (start.equals("PARAGRAPH")){
-                String tag3 = parser.nextText();//paragraph 내용
-                Log.d("para test3", tag3);
-                link = link + tag3;
+                //#4,7,8,9 section -> article -> /section -> section 과정 안 넘어감
+                if(check.equals("ARTICLE")){
+                    parser.next();
+                    parser.next();
+                    parser.nextTag();
+                    String tag5 = parser.getName();
+                    Log.d("art sec", tag5);
+                }
 
-                //2번째 약은 이렇게 해야 다 뜸
+
+
+            }
+//            else if (start.equals("PARAGRAPH")){
+//                String tag3 = parser.nextText();//paragraph 내용
+//                Log.d("para test3", tag3);
+//                link = link + tag3;
+//
+//                //2번째 약은 이렇게 해야 다 뜸
 //                parser.nextTag();
 //                String art2 = parser.getName();
 //                Log.d("art2", art2);
@@ -143,7 +159,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
 
 
-            }
+           // }
 
             //parser.nextTag();//paragraph
             //String tag = parser.getName();
@@ -232,7 +248,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=3&numOfRows=1&"+"ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=10&numOfRows=1&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
@@ -293,24 +309,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
                             if (parser.getName().equals("EE_DOC_DATA")) bus.setEE_DOC_DATA(readLink(parser));
-
-//                            if(parser.getAttributeName(0).equals("title")){
-//                                bus.setEE_DOC_DATA(parser.getAttributeValue(0));
-//                            }else{
-//                                Log.e("error2", "EE_DOC_DATA getattributeNAme error");
-//                            }
-
-//                            if (parser.getName().equals("EE_DOC_DATA")) {
-//                                parser.next();
-//                                if(parser.getAttributeName(0).equals("title")){
-//                                    bus.setEE_DOC_DATA(parser.getAttributeValue(0));
-//                                }else{
-//                                    Log.e("error2", "EE_DOC_DATA getattributeNAme error");
-//                                }
-//                            } else{
-//                                Log.e("error1", "EE_DOC_DATA getNAme error");
-//                            }
-
 
                             break;
 
