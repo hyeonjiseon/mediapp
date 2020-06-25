@@ -104,15 +104,28 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
                 }
             } else if (start.equals("ARTICLE")){
-                parser.nextTag();//ARTICLE
                 String ti = parser.getAttributeValue(0);//ARTICLE first line
                 Log.d("test", ti);
                 link = link + ti;
 
+                //1번만 하려면 이렇게 해야 함
+                parser.nextTag();//ARTICLE
+                String check = parser.getName();
+                Log.d("check", check);
+
+                if(check.equals("PARAGRAPH")) {
+                    String tag2 = parser.nextText();//paragraph 내용
+                    Log.d("art para", tag2);
+                    link = link + tag2;
+//                    parser.nextTag();
+//                    String check2 = parser.getName();
+//                    Log.d("check2", check2);
+                }
+
             } else if (start.equals("PARAGRAPH")){
-                String tag2 = parser.nextText();//paragraph 내용
-                Log.d("para test3", tag2);
-                link = link + tag2;
+                String tag3 = parser.nextText();//paragraph 내용
+                Log.d("para test3", tag3);
+                link = link + tag3;
 
                 //2번째 약은 이렇게 해야 다 뜸
 //                parser.nextTag();
@@ -219,7 +232,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=1&"+"ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=3&numOfRows=1&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
