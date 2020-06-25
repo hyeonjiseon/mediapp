@@ -1,0 +1,142 @@
+1. <ITEM_NAME>종근당염산에페드린정</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="">
+			<ARTICLE title="1. 다음 질환에서의 기침 : 기관지천식, 감기, 급?만성기관지염, 상기도염"/>
+			<ARTICLE title="2. 비점막의 충혈·종창"/>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+2.<ITEM_NAME>종근당아스피린정</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="">
+			<ARTICLE title="1. 주효능 효과">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+					<![CDATA[ 류마티양 관절염, 골관절염(퇴행성 관절질환), 강직성 척추염, 감기로 인한 발열 및 동통, 치통, 두통, 월경통, 신경통, 요통, 관절통, 근육통 ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+			<ARTICLE title="2. 다음 질환에도 사용할 수 있다.">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+					<![CDATA[ 류마티열, 섬유조직증식증, 수술후 동통, 인후통, 염좌통, 좌골신경통 ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+3.<ITEM_NAME>중외5%포도당생리식염액(수출명:5%DextroseinnormalsalineInj.)</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="">
+			<ARTICLE title="">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+					<![CDATA[ ○ 탈수증, 수술전후 등의 수분ㆍ전해질 보급 ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+					<![CDATA[ ○ 에너지 보급 ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+4.<ITEM_NAME>중외5%포도당주사액</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="(5%)">
+			<ARTICLE title="1. 탈수증 특히 수분결핍시의 수분보급"/>
+			<ARTICLE title="2. 주사제의 용해희석제"/>
+		</SECTION>
+		<SECTION title="(10%∼70%)">
+			<ARTICLE title="1. 고칼륨혈증, 순환허탈, 저혈당시의 에너지 보급"/>
+			<ARTICLE title="2. 심질환(G,I,K요법) 그 외 수분, 에너지 보급"/>
+			<ARTICLE title="3. 약물ㆍ독물 중독"/>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+5.<ITEM_NAME>영신단</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="">
+			<ARTICLE title="">
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="0">
+				<![CDATA[ 식욕감퇴(식욕부진), 위부팽만감, 소화불량, 과식, 식체(위체(체함)), 구역, 구토 ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+6. <ITEM_NAME>판피린정</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="">
+			<ARTICLE title="">
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="0">
+				<![CDATA[ 감기 제증상 (콧물, 코막힘, 재채기, 인후통, 오한, 발열, 두통, 관절통, 근육통)의 완화 ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+7.<ITEM_NAME>중외20%포도당주사액</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="(5%)">
+			<ARTICLE title="1.탈수증 특히 수분결핍시의 수분보급"/>
+			<ARTICLE title="2.주사제의 용해희석제"/>
+		</SECTION>
+		<SECTION title="(10%~70%)">
+			<ARTICLE title="1.고칼륨혈증, 순환허탈, 저혈당시의 에너지 보급"/>
+			<ARTICLE title="2.심질환(G,I,K요법) 그 외 수분, 에너지 보급"/>
+			<ARTICLE title="3.약물.독물 중독"/>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+8. <ITEM_NAME>중외50%포도당주사액</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="(5%)">
+			<ARTICLE title="1. 탈수증 특히 수분결핍시의 수분보급"/>
+			<ARTICLE title="2. 주사제의 용해희석제"/>
+		</SECTION>
+		<SECTION title="(10%~70%)">
+			<ARTICLE title="1. 고칼륨혈증, 순환허탈, 저혈당시의 에너지 보급"/>
+			<ARTICLE title="2. 심질환(G,I,K요법) 그 외 수분, 에너지 보급"/>
+			<ARTICLE title="3. 약물·독물 중독"/>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+9. <ITEM_NAME>대한포도당주사액(10%)</ITEM_NAME>
+<EE_DOC_DATA>
+	<DOC title="효능효과" type="EE">
+		<SECTION title="(5%)">
+			<ARTICLE title="1. 탈수증 특히 수분결핍시의 수분보급"/>
+			<ARTICLE title="2. 주사제의 용해희석제"/>
+		</SECTION>
+		<SECTION title="(10%∼70%)">
+			<ARTICLE title="1. 고칼륨혈증, 순환허탈, 저혈당시의 에너지 보급"/>
+			<ARTICLE title="2. 심질환(G,I,K요법) 그 외 수분, 에너지 보급"/>
+			<ARTICLE title="3. 약물ㆍ독물 중독"/>
+		</SECTION>
+	</DOC>
+</EE_DOC_DATA>
+
+10.<ITEM_NAME>대한멸균증류수(주사용수)</ITEM_NAME>
+<EE_DOC_DATA>
+<DOC title="효능효과" type="EE">
+<SECTION title="">
+<ARTICLE title="">
+<PARAGRAPH tagName="p" textIndent="0" marginLeft="0">
+<![CDATA[ 점안제, 주입제, 시약등의 조제나 약품 제조에 사용함 ]]>
+</PARAGRAPH>
+</ARTICLE>
+</SECTION>
+</DOC>
+</EE_DOC_DATA>

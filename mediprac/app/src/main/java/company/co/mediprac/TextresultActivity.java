@@ -84,19 +84,121 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
         String link = "";
         parser.require(XmlPullParser.START_TAG, "", "EE_DOC_DATA");
-        parser.next();
-        String tag = parser.getName();
-        Log.d("test", tag);
-        if (tag.equals("DOC")) {
-            String relType = parser.getAttributeValue(null, "title");
-            Log.d("test", relType);
-            if (relType.equals("효능효과")){
-                parser.nextTag(); // section
-                parser.nextTag();
-                String stag = parser.getName();
-                if(stag.equals("ARTICLE")) {
-                    Log.d("test3", stag);
-                    String ti = parser.getAttributeValue(null, "title");
+        parser.next();//DOC
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+
+            String start = parser.getName();
+            Log.d("start", start);
+
+            if (start.equals("SECTION")){
+                if(parser.getAttributeValue(0) == null){
+                    continue;
+                } else if (parser.getAttributeValue(0) != null){
+                    String sec = parser.getAttributeValue(0);
+                    Log.d("sec", sec);
+                    link = link + sec;
+
+                }
+            } else if (start.equals("ARTICLE")){
+                //parser.nextTag();//ARTICLE
+                String ti = parser.getAttributeValue(0);//ARTICLE first line
+                Log.d("test", ti);
+                link = link + ti;
+
+
+
+            } else if (start.equals("PARAGRAPH")){
+                String tag2 = parser.nextText();//paragraph 내용
+                Log.d("para test3", tag2);
+                link = link + tag2;
+
+                //2번째 약은 이렇게 해야 다 뜸
+//                parser.nextTag();
+//                String art2 = parser.getName();
+//                Log.d("art2", art2);
+
+
+//                if(parser.next() != XmlPullParser.END_TAG){
+//                    continue;
+//                } else {
+//                    parser.nextTag();
+//                    String art2 = parser.getName();
+//                    Log.d("art2", art2);
+//                }
+
+
+
+            }
+
+            //parser.nextTag();//paragraph
+            //String tag = parser.getName();
+
+//            if (parser.getName().equals("ARTICLE")) {
+//                Log.d("art test2", tag);
+//                String tag2 = parser.getAttributeValue(0);
+//                Log.d("art test3", tag2);
+//                link = link + tag2;
+//
+//            } else if (parser.getName().equals("PARAGRAPH")) {
+//                Log.d("para test2", tag);
+//                String tag2 = parser.nextText();//paragraph 내용
+//                Log.d("para test3", tag2);
+//                link = link + tag2;
+//            }
+        }
+
+//        parser.nextTag();//ARTICLE
+//        String tag3 = parser.getName();
+//        Log.d("test4", tag3);
+
+//        String ti2 = parser.getAttributeValue(null, "title");
+//        Log.d("test5", ti2);
+        //String tag2 = parser.getText();
+
+
+
+//        parser.nextTag();
+//        String stag2 = parser.getName();//ARTICLE
+//        Log.d("test5", stag2);
+//        String ti2 = parser.getAttributeValue(null, "title");
+//        Log.d("test5", ti2);
+
+//        String tag = parser.getName();
+//        if (tag.equals("DOC")) {
+//            String relType = parser.getAttributeValue(null, "title");
+//            Log.d("test", relType);
+//            if (relType.equals("효능효과")){
+//                parser.nextTag();//section
+//                parser.nextTag();//article
+//                String stag = parser.getName();
+//                if(stag.equals("ARTICLE")) {
+//                    Log.d("test3", stag);
+//                    String ti = parser.getAttributeValue(null, "title");
+//                    Log.d("test4", ti);
+//                    parser.next();
+//                    String stag2 = parser.getName();
+//                    String ti2 = parser.getAttributeValue(null, "title");
+//                    Log.d("test5", stag2);
+
+
+//                    parser.next();
+//                    String stag3 = parser.getName();
+//                    Log.d("test6", stag3);
+//                    parser.next();
+//                    String stag4 = parser.getName();
+//                    Log.d("test5", stag2);
+//                    parser.next();
+//                    String stag5 = parser.getName();
+//                    Log.d("test5", stag2);
+//
+//                    if(stag2.equals("ARTICLE")){
+//                        String ti2 = parser.getAttributeValue(0);
+//                        Log.d("test6", ti2);
+//                    }
                     /*parser.nextTag();
                     String tag2 = parser.getName();
                     Log.d("test2", tag2);
@@ -108,9 +210,9 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                     parser.nextTag();
                     tag2 = parser.getName();
                     Log.d("test5", tag2); */
-                }
-            }
-        }
+                //}
+          //  }
+       // }
         //parser.require(XmlPullParser.END_TAG, "", "EE_DOC_DATA");
         return link;
     }
@@ -119,7 +221,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=1&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
@@ -137,8 +239,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 boolean b_INDUTY_TYPE = false;
                 boolean b_CHANGE_DATE = false;
                 boolean b_INGR_NAME = false;
-
-                boolean b_EE_DOC_DATA = false;
 
                 URL url = new URL(requestUrl);
                 InputStream is = url.openStream();
@@ -168,8 +268,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("ITEM_NAME")) b_ITEM_NAME = true;
                             if (parser.getName().equals("ENTP_NAME")) b_ENTP_NAME = true;
                             if (parser.getName().equals("ETC_OTC_CODE")) b_ETC_OTC_CODE = true;
-                            if (parser.getName().equals("ITEM_PERMIT_DATE"))
-                                b_ITEM_PERMIT_DATE = true;
+                            if (parser.getName().equals("ITEM_PERMIT_DATE")) b_ITEM_PERMIT_DATE = true;
                             if (parser.getName().equals("ENTP_NO")) b_ENTP_NO = true;
                             if (parser.getName().equals("BAR_CODE")) b_BAR_CODE = true;
                             if (parser.getName().equals("ITEM_SEQ")) b_ITEM_SEQ = true;
@@ -178,29 +277,11 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("PACK_UNIT")) b_PACK_UNIT = true;
                             if (parser.getName().equals("PERMIT_KIND_NAME")) b_BAR_CODE = true;
                             if (parser.getName().equals("CANCEL_DATE")) b_BAR_CODE = true;
-                            if (parser.getName().equals("MAKE_MATERIAL_FLAG"))
-                                b_MAKE_MATERIAL_FLAG = true;
+                            if (parser.getName().equals("MAKE_MATERIAL_FLAG")) b_MAKE_MATERIAL_FLAG = true;
                             if (parser.getName().equals("INDUTY_TYPE")) b_INDUTY_TYPE = true;
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
-                            //if (parser.getName().equals("EE_DOC_DATA")) b_EE_DOC_DATA = true;
-
-                            if (parser.getName().equals("EE_DOC_DATA")){
-
-
-//                                while (parser.next() != XmlPullParser.END_TAG) {
-//                                    if (parser.getEventType() != XmlPullParser.START_TAG) {
-//                                        continue;
-//                                    }
-//                                    String name = parser.getName();
-//                                    if (name.equals("DOC")) {
-//
-//                                    } else {
-//                                        skip(parser);
-//                                    }
-//                                }
-                                bus.setEE_DOC_DATA(readLink(parser));
-                            }
+                            if (parser.getName().equals("EE_DOC_DATA")) bus.setEE_DOC_DATA(readLink(parser));
 
 //                            if(parser.getAttributeName(0).equals("title")){
 //                                bus.setEE_DOC_DATA(parser.getAttributeValue(0));
