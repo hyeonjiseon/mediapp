@@ -104,12 +104,10 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
                 }
             } else if (start.equals("ARTICLE")){
-                //parser.nextTag();//ARTICLE
+                parser.nextTag();//ARTICLE
                 String ti = parser.getAttributeValue(0);//ARTICLE first line
                 Log.d("test", ti);
                 link = link + ti;
-
-
 
             } else if (start.equals("PARAGRAPH")){
                 String tag2 = parser.nextText();//paragraph 내용
