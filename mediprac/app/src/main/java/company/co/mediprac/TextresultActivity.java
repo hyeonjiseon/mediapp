@@ -127,13 +127,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 }
 
                 //#4,7,8,9 section -> article -> /section -> section 과정 안 넘어감
-                if(check.equals("ARTICLE")){
-                    parser.next();
-                    parser.next();
-                    parser.nextTag();
-                    String tag5 = parser.getName();
-                    Log.d("art sec", tag5);
-                }
 
 
 
@@ -248,7 +241,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=10&numOfRows=1&"+"ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=10&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
