@@ -81,43 +81,37 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         Toast.makeText(this, "클릭" + position, Toast.LENGTH_SHORT).show();
     }
 
-    private void skip(XmlPullParser parser) throws XmlPullParserException, IOException {
-        if (parser.getEventType() != XmlPullParser.START_TAG) {
-            throw new IllegalStateException();
-        }
-        int depth = 1;
-        while (depth != 0) {
-            switch (parser.next()) {
-                case XmlPullParser.END_TAG:
-                    depth--;
-                    break;
-                case XmlPullParser.START_TAG:
-                    depth++;
-                    break;
-            }
-        }
-    }
-
     private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
         String link = "";
         parser.require(XmlPullParser.START_TAG, "", "EE_DOC_DATA");
         parser.next();
         String tag = parser.getName();
-        String relType = parser.getAttributeValue(null, "title");
+        Log.d("test", tag);
         if (tag.equals("DOC")) {
+            String relType = parser.getAttributeValue(null, "title");
+            Log.d("test", relType);
             if (relType.equals("효능효과")){
-                parser.next();
-                parser.next();
-                String tag2 = parser.getName();
-                if(tag2.equals("ARTICLE")){
-                    link = parser.getAttributeValue(0);
+                parser.nextTag(); // section
+                parser.nextTag();
+                String stag = parser.getName();
+                if(stag.equals("ARTICLE")) {
+                    Log.d("test3", stag);
+                    String ti = parser.getAttributeValue(null, "title");
+                    /*parser.nextTag();
+                    String tag2 = parser.getName();
+                    Log.d("test2", tag2);
+                    if (tag2.equals("ARTICLE")) {
+                        Log.d("test3", tag2);
+                        String ti = parser.getAttributeValue(null, "title");
+                        Log.d("test4", ti);
+                    }
+                    parser.nextTag();
+                    tag2 = parser.getName();
+                    Log.d("test5", tag2); */
                 }
-                parser.nextTag();
-                parser.nextTag();
-                parser.nextTag();
             }
         }
-        parser.require(XmlPullParser.END_TAG, "", "EE_DOC_DATA");
+        //parser.require(XmlPullParser.END_TAG, "", "EE_DOC_DATA");
         return link;
     }
 
