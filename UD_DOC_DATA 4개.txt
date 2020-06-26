@@ -1,0 +1,109 @@
+1.<ITEM_NAME>종근당염산에페드린정</ITEM_NAME>
+<UD_DOC_DATA>
+	<DOC title="용법용량" type="UD">
+		<SECTION title="">
+			<ARTICLE title="">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 성인 : 에페드린염산염으로서 1회 12.5 ～ 25 mg 1일 1 ～ 3회 경구투여한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 증상에 따라 적절히 증감한다. ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</UD_DOC_DATA>
+2. <ITEM_NAME>종근당아스피린정</ITEM_NAME>  paragraph 3-6세, 1-2세 안 나옴
+<UD_DOC_DATA>
+	<DOC title="용법용량" type="UD">
+		<SECTION title="">
+			<ARTICLE title="(경구)">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 성인 : 아스피린으로서 1회 0.5-1.5g 1일 2-3회 경구투여한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 연령, 질환, 증상에 따라 적절히 증감한다. ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+			<ARTICLE title="(어린이용)">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 다음 1회 용량을 1일 2-3회 경구투여한다. ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+			<ARTICLE title="(100mg)(81mg)">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 11-14세 : 400-500mg (4정) (5정) ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 7-10세 : 300-400mg (3정) (4정) ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 3- 6세 : 150-250mg (2정) (2-3정) ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 1- 2세 : 100-150mg (1정) (1-2정) ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</UD_DOC_DATA>
+3. <ITEM_NAME>중외5%포도당생리식염액(수출명:5%DextroseinnormalsalineInj.)</ITEM_NAME>  세 번째 paragraph 투여량, 투여속도는 연령, 체중, 증상에~ 안 나옴
+<UD_DOC_DATA>
+	<DOC title="용법용량" type="UD">
+		<SECTION title="">
+			<ARTICLE title="">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 보통 성인 1일 500～1,000mL를 2～3회 나누어 점적 정맥주사한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 투여속도는 시간당 250～500mL(분당 60～120방울)이고, 영ㆍ유아의 경우 시간당 15～60mL(분당 4～15방울), 고령자의 경우 시간당 250mL(분당 60방울)로 한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ 투여량, 투여속도는 연령, 체중, 증상에 따라 적절히 증감한다. ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</UD_DOC_DATA>
+4. <ITEM_NAME>중외5%포도당주사액</ITEM_NAME>
+<UD_DOC_DATA>
+	<DOC title="용법용량" type="UD">
+		<SECTION title="">
+			<ARTICLE title="">
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ (주사제) ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ (5%) ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ ○ 성인 : 1회 500∼1000 mL 정맥주사한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ ○ 점적정맥주사 속도는 포도당으로서 시간당 0.5 g/kg 이하로 한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ ○ 주사제의 용해 희석에는 적당량을 사용한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ 연령, 증상에 따라 적절히 증감한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="" marginLeft="">
+				<![CDATA[ (10%∼70%) ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ ○ 성인 : 1회 20∼500 mL 정맥주사한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ ○ 점적정맥주사 속도는 포도당으로서 시간당 0.5 g/kg 이하로 한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ ○ 주사제의 용해희석에는 적당량을 사용한다. ]]>
+				</PARAGRAPH>
+				<PARAGRAPH tagName="p" textIndent="0" marginLeft="2">
+				<![CDATA[ 연령, 증상에 따라 적절히 증감한다. ]]>
+				</PARAGRAPH>
+			</ARTICLE>
+		</SECTION>
+	</DOC>
+</UD_DOC_DATA>

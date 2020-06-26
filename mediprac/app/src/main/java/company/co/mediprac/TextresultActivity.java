@@ -246,11 +246,74 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         return link;
     }
 
+    private String readLink2(XmlPullParser parser) throws IOException, XmlPullParserException {
+        String link2 = "";
+        parser.require(XmlPullParser.START_TAG, "", "UD_DOC_DATA");
+        parser.next();//DOC
+
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+
+            String start = parser.getName();
+            Log.d("ud start", start);
+
+            if (start.equals("SECTION")) {
+                if (parser.getAttributeValue(0) != null) {
+                    String sec = parser.getAttributeValue(0);
+                    Log.d("ud sec", sec);
+                    link2 = link2 + sec;
+                }
+            } else if (start.equals("ARTICLE")) {
+                String ti = parser.getAttributeValue(0);//ARTICLE first line
+                Log.d("ud test", ti);
+                link2 = link2 + ti;
+
+                //1번만 하려면 이렇게 해야 함
+                parser.nextTag();//ARTICLE
+                String check = parser.getName();
+                Log.d("ud check", check);
+
+//                parser.nextTag();
+//                String tag5 = parser.getName();
+//                Log.d("tag5", tag5);
+//
+//                parser.nextTag();
+//                String tag6 = parser.getName();
+//                Log.d("tag6", tag6);
+
+                if (check.equals("PARAGRAPH")) {
+                    String tag2 = parser.nextText();//paragraph 내용
+                    Log.d("ud art para", tag2);
+                    link2 = link2 + tag2;
+
+                    parser.nextTag();
+                    String tag3 = parser.getName();
+                    Log.d("ud tag3", tag3);
+
+                    if (tag3.equals("PARAGRAPH")) {
+                        String tag4 = parser.nextText();//paragraph 내용
+                        Log.d("ud art para para", tag4);
+                        link2 = link2 + tag4;
+
+                        parser.nextTag();
+                        String check2 = parser.getName();
+                        Log.d("ud check2", check2);
+
+                    }
+                }
+                //#4,7,8,9 section -> article -> /section -> section 과정 안 넘어감
+            }
+        }
+        return link2;
+    }
+
     public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=1&"+"ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=10&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
@@ -311,6 +374,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
                             if (parser.getName().equals("EE_DOC_DATA")) bus.setEE_DOC_DATA(readLink(parser));
+                            if (parser.getName().equals("UD_DOC_DATA")) bus.setUD_DOC_DATA(readLink2(parser));
 
                             break;
 
@@ -364,23 +428,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                                 bus.setINGR_NAME(parser.getText());
                                 b_INGR_NAME = false;
                             }
-//                            else if (b_EE_DOC_DATA) {
-//                                bus.setEE_DOC_DATA(parser.getText());
-//                                b_EE_DOC_DATA = false;
-//                            }
-//                                //bus.setEE_DOC_DATA(readEffect(parser));
-//                                //bus.setEE_DOC_DATA(parser.getName());
-//                                bus.setEE_DOC_DATA(parser.getAttributeValue(0));
-//                                b_EE_DOC_DATA = false;
-
-//                                //parser.next();
-//                                if(parser.getAttributeName(0).equals("DOC title=")){
-//                                    //parser.next();
-//                                    //if(parser.getAttributeValue(1).equals("Article title=")){
-//                                        bus.setEE_DOC_DATA(parser.getText());
-//                                        b_EE_DOC_DATA = false;
-//                                        break;
-//                                    }
                             break;
                     }
                     eventType = parser.next();

@@ -20,6 +20,9 @@ public class SearchinfoActivity extends AppCompatActivity {
         TextView textView = (TextView)findViewById(R.id.item_name);
         textView.setText(ITEM_NAME);
 
+        String ud = getIntent().getStringExtra("UD_DOC_DATA");
+        Log.d("ud", ud);
+
         Button button_search = findViewById(R.id.result_btn1);
                 button_search.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -47,21 +50,27 @@ public class SearchinfoActivity extends AppCompatActivity {
         });
 
         Button result_btn2 = findViewById(R.id.result_btn2);
-        button_search.setOnClickListener(new View.OnClickListener() {
+        result_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_btn2 = new Intent(getApplicationContext(), BasicinfoActivity.class);
+                Intent intent_btn2 = new Intent(getApplicationContext(), EffectinfoActivity.class);
+                intent_btn2.putExtra("EE_DOC_DATA", getIntent().getStringExtra("EE_DOC_DATA"));
+                startActivity(intent_btn2);
+            }
+        });
+
+        Button result_btn3 = findViewById(R.id.result_btn3);
+        result_btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn3 = new Intent(getApplicationContext(), CapinfoActivity.class);
+                intent_btn3.putExtra("UD_DOC_DATA", getIntent().getStringExtra("UD_DOC_DATA"));
+                startActivity(intent_btn3);
             }
         });
 
 
-
         String MATERIAL_NAME = getIntent().getStringExtra("material_name");//원료성분
-
-
-        String EE_DOC_DATA = getIntent().getStringExtra("EE_DOC_DATA"); //효능효과
-        Log.e("EE_DOC_DATA", EE_DOC_DATA);
-
 
 
     }

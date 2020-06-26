@@ -44,6 +44,7 @@ http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?S
 </EE_DOC_DATA>
 
 4.<ITEM_NAME>중외5%포도당주사액</ITEM_NAME>
+
 <EE_DOC_DATA>
 	<DOC title="효능효과" type="EE">
 		<SECTION title="(5%)">

@@ -12,6 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".CapinfoActivity"></activity>
+        <activity android:name=".EffectinfoActivity" />
         <activity android:name=".BasicinfoActivity" />
         <activity android:name=".SearchinfoActivity" />
         <activity android:name=".TextresultActivity" />
