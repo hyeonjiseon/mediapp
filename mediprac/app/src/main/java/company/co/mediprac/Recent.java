@@ -2,23 +2,23 @@ package company.co.mediprac;
 
 public class Recent {
 
-    String ITEM_NAME;//품목명
-    String ENTP_NAME;//업체명
-    String ETC_OTC_CODE;//전문일반
-    String ITEM_PERMIT_DATE;//허가일자
-    String ENTP_NO;//업체허가번호
-    String BAR_CODE;//표준코드
-    String ITEM_SEQ;//품목기준코드
-    String CHART;//성상, 제품모양
-    String MATERIAL_NAME;//원료성분
-    String PACK_UNIT;//포장단위
-    String PERMIT_KIND_NAME;//허가신고구분
-    String CANCEL_DATE;//취소일자
-    String MAKE_MATERIAL_FLAG;//완제원료구분
-    String INDUTY_TYPE;//업종구분
-    String CHANGE_DATE;//변경일자
-    String INGR_NAME;//첨가제
-    String EE_DOC_DATA;//효능효과
+    String ITEM_NAME;//품목명1
+    String ENTP_NAME;//업체명1
+    String ETC_OTC_CODE;//전문일반1
+    String ITEM_PERMIT_DATE;//허가일자1
+    String ENTP_NO;//업체허가번호1
+    String BAR_CODE;//표준코드1
+    String ITEM_SEQ;//품목기준코드1
+    String CHART;//성상, 제품모양1
+    String MATERIAL_NAME;//원료성분8
+    String PACK_UNIT;//포장단위1
+    String PERMIT_KIND_NAME;//허가신고구분1
+    String CANCEL_DATE;//취소일자1
+    String MAKE_MATERIAL_FLAG;//완제원료구분1
+    String INDUTY_TYPE;//업종구분1
+    String CHANGE_DATE;//변경일자1
+    String INGR_NAME;//첨가제1
+    String EE_DOC_DATA;//효능효과2
 
 
     public String getITEM_NAME() { return ITEM_NAME; }

@@ -250,7 +250,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=4&numOfRows=1&"+"ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=1&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
@@ -304,8 +304,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("CHART")) b_CHART = true;
                             if (parser.getName().equals("MATERIAL_NAME")) b_MATERIAL_NAME = true;
                             if (parser.getName().equals("PACK_UNIT")) b_PACK_UNIT = true;
-                            if (parser.getName().equals("PERMIT_KIND_NAME")) b_BAR_CODE = true;
-                            if (parser.getName().equals("CANCEL_DATE")) b_BAR_CODE = true;
+                            if (parser.getName().equals("PERMIT_KIND_NAME")) b_PERMIT_KIND_NAME = true;
+                            if (parser.getName().equals("CANCEL_DATE")) b_CANCEL_DATE = true;
                             if (parser.getName().equals("MAKE_MATERIAL_FLAG")) b_MAKE_MATERIAL_FLAG = true;
                             if (parser.getName().equals("INDUTY_TYPE")) b_INDUTY_TYPE = true;
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;

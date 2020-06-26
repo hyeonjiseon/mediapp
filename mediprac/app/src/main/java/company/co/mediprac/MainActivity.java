@@ -8,8 +8,6 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//import android.app.Activity;
-
 public class MainActivity extends AppCompatActivity {
     private  static Context context;
 
