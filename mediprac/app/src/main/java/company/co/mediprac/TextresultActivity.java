@@ -123,13 +123,14 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                         String tag4 = parser.nextText();//paragraph 내용
                         Log.d("art para para", tag4);
                         link = link + tag4;
+
+                        parser.nextTag();
+                        String check2 = parser.getName();
+                        Log.d("check2", check2);
+
                     }
                 }
-
                 //#4,7,8,9 section -> article -> /section -> section 과정 안 넘어감
-
-
-
             }
 //            else if (start.equals("PARAGRAPH")){
 //                String tag3 = parser.nextText();//paragraph 내용
@@ -241,7 +242,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=10&"+"ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=4&numOfRows=1&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
