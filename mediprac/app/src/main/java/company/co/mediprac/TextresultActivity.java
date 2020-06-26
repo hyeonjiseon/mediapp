@@ -83,63 +83,57 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
     private String readLink(XmlPullParser parser) throws IOException, XmlPullParserException {
         String link = "";
-        parser.require(XmlPullParser.START_TAG, "", "EE_DOC_DATA");
-        parser.next();//DOC
-
+        //parser.require(XmlPullParser.START_TAG, "", "EE_DOC_DATA");
+        //parser.next();//DOC
         while (parser.next() != XmlPullParser.END_TAG) {
-            if (parser.getEventType() != XmlPullParser.START_TAG) {
-                continue;
-            }
-
-            String start = parser.getName();
-            Log.d("start", start);
-
-            if (start.equals("SECTION")){
-                if(parser.getAttributeValue(0) != null){
-                    String sec = parser.getAttributeValue(0);
-                    Log.d("sec", sec);
-                    link = link + sec;
+//            if (parser.getEventType() != XmlPullParser.START_TAG) {
+////                continue;
+////            }
+            while (parser.next() != XmlPullParser.END_TAG) {
+                if (parser.getEventType() != XmlPullParser.START_TAG) {
+                    continue;
                 }
-            } else if (start.equals("ARTICLE")){
-                String ti = parser.getAttributeValue(0);//ARTICLE first line
-                Log.d("test", ti);
-                link = link + ti;
+                String start = parser.getName();
+                Log.d("start1", start);
 
-                //1번만 하려면 이렇게 해야 함
-                parser.nextTag();//ARTICLE
-                String check = parser.getName();
-                Log.d("check", check);
+                if (start.equals("SECTION")) {
+                    if (parser.getAttributeValue(0) != null) {
+                        String sec = parser.getAttributeValue(0);
+                        Log.d("sec", sec);
+                        link = link + sec;
+                    }
+                } else if (start.equals("ARTICLE")) {
+                    String ti = parser.getAttributeValue(0);//ARTICLE first line
+                    Log.d("test", ti);
+                    link = link + ti;
 
-//                parser.nextTag();
-//                String tag5 = parser.getName();
-//                Log.d("tag5", tag5);
-//
-//                parser.nextTag();
-//                String tag6 = parser.getName();
-//                Log.d("tag6", tag6);
+                    //1번만 하려면 이렇게 해야 함
+                    parser.nextTag();//ARTICLE
+                    String check = parser.getName();
+                    Log.d("check", check);
 
-                if(check.equals("PARAGRAPH")) {
-                    String tag2 = parser.nextText();//paragraph 내용
-                    Log.d("art para", tag2);
-                    link = link + tag2;
-
-                    parser.nextTag();
-                    String tag3 = parser.getName();
-                    Log.d("tag3", tag3);
-
-                    if(tag3.equals("PARAGRAPH")){
-                        String tag4 = parser.nextText();//paragraph 내용
-                        Log.d("art para para", tag4);
-                        link = link + tag4;
+                    if (check.equals("PARAGRAPH")) {
+                        String tag2 = parser.nextText();//paragraph 내용
+                        Log.d("art para", tag2);
+                        link = link + tag2;
 
                         parser.nextTag();
-                        String check2 = parser.getName();
-                        Log.d("check2", check2);
+                        String tag3 = parser.getName();
+                        Log.d("tag3", tag3);
 
+                        if (tag3.equals("PARAGRAPH")) {
+                            String tag4 = parser.nextText();//paragraph 내용
+                            Log.d("art para para", tag4);
+                            link = link + tag4;
+
+                            parser.nextTag();
+                            String check2 = parser.getName();
+                            Log.d("check2", check2);
+
+                        }
                     }
+                    //#4,7,8,9 section -> article -> /section -> section 과정 안 넘어감
                 }
-                //#4,7,8,9 section -> article -> /section -> section 과정 안 넘어감
-            }
 //            else if (start.equals("PARAGRAPH")){
 //                String tag3 = parser.nextText();//paragraph 내용
 //                Log.d("para test3", tag3);
@@ -160,11 +154,10 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //                }
 
 
+                // }
 
-           // }
-
-            //parser.nextTag();//paragraph
-            //String tag = parser.getName();
+                //parser.nextTag();//paragraph
+                //String tag = parser.getName();
 
 //            if (parser.getName().equals("ARTICLE")) {
 //                Log.d("art test2", tag);
@@ -178,7 +171,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //                Log.d("para test3", tag2);
 //                link = link + tag2;
 //            }
-        }
+            }
 
 //        parser.nextTag();//ARTICLE
 //        String tag3 = parser.getName();
@@ -186,8 +179,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
 //        String ti2 = parser.getAttributeValue(null, "title");
 //        Log.d("test5", ti2);
-        //String tag2 = parser.getText();
-
+            //String tag2 = parser.getText();
 
 
 //        parser.nextTag();
@@ -239,14 +231,16 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                     parser.nextTag();
                     tag2 = parser.getName();
                     Log.d("test5", tag2); */
-                //}
-          //  }
-       // }
-        //parser.require(XmlPullParser.END_TAG, "", "EE_DOC_DATA");
+            //}
+            //  }
+            // }
+            //parser.require(XmlPullParser.END_TAG, "", "EE_DOC_DATA");
+
+        }
         return link;
     }
 
-    private String readLink2(XmlPullParser parser) throws IOException, XmlPullParserException {
+    /*private String readLink2(XmlPullParser parser) throws IOException, XmlPullParserException {
         String link2 = "";
         parser.require(XmlPullParser.START_TAG, "", "UD_DOC_DATA");
         parser.next();//DOC
@@ -307,7 +301,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             }
         }
         return link2;
-    }
+    }*/
 
     public class MyAsyncTask extends AsyncTask<String, Void, String> {
 
@@ -374,7 +368,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
                             if (parser.getName().equals("EE_DOC_DATA")) bus.setEE_DOC_DATA(readLink(parser));
-                            if (parser.getName().equals("UD_DOC_DATA")) bus.setUD_DOC_DATA(readLink2(parser));
+                            //if (parser.getName().equals("UD_DOC_DATA")) bus.setUD_DOC_DATA(readLink(parser));
 
                             break;
 

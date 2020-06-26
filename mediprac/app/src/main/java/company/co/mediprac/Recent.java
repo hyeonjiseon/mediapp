@@ -19,8 +19,7 @@ public class Recent {
     String CHANGE_DATE;//변경일자1
     String INGR_NAME;//첨가제1
     String EE_DOC_DATA;//효능효과2
-    String UD_DOC_DATA;//용법용량3
-
+    //String UD_DOC_DATA;//용법용량3
 
     public String getITEM_NAME() { return ITEM_NAME; }
     public String getENTP_NAME() { return ENTP_NAME; }
@@ -39,7 +38,7 @@ public class Recent {
     public String getCHANGE_DATE() { return CHANGE_DATE; }
     public String getINGR_NAME() { return INGR_NAME; }
     public String getEE_DOC_DATA() { return EE_DOC_DATA; }
-    public String getUD_DOC_DATA() { return UD_DOC_DATA; }
+    //public String getUD_DOC_DATA() { return UD_DOC_DATA; }
 
     public void setITEM_NAME(String ITEM_NAME) { this.ITEM_NAME = ITEM_NAME; }
     public void setENTP_NAME(String ENTP_NAME) { this.ENTP_NAME = ENTP_NAME; }
@@ -58,9 +57,5 @@ public class Recent {
     public void setCHANGE_DATE(String CHANGE_DATE) { this.CHANGE_DATE = CHANGE_DATE; }
     public void setINGR_NAME(String INGR_NAME) { this.INGR_NAME = INGR_NAME; }
     public void setEE_DOC_DATA(String EE_DOC_DATA) { this.EE_DOC_DATA = EE_DOC_DATA; }
-    public void setUD_DOC_DATA(String UD_DOC_DATA) { this.UD_DOC_DATA = UD_DOC_DATA; }
-
-
-
-
+    //public void setUD_DOC_DATA(String UD_DOC_DATA) { this.UD_DOC_DATA = UD_DOC_DATA; }
 }

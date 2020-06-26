@@ -59,18 +59,18 @@ public class SearchinfoActivity extends AppCompatActivity {
             }
         });
 
-        Button result_btn3 = findViewById(R.id.result_btn3);
-        result_btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_btn3 = new Intent(getApplicationContext(), CapinfoActivity.class);
-                intent_btn3.putExtra("UD_DOC_DATA", getIntent().getStringExtra("UD_DOC_DATA"));
-                startActivity(intent_btn3);
-            }
-        });
+//        Button result_btn3 = findViewById(R.id.result_btn3);
+//        result_btn3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent_btn3 = new Intent(getApplicationContext(), CapinfoActivity.class);
+//                intent_btn3.putExtra("UD_DOC_DATA", getIntent().getStringExtra("UD_DOC_DATA"));
+//                startActivity(intent_btn3);
+//            }
+//        });
 
 
-        String MATERIAL_NAME = getIntent().getStringExtra("material_name");//원료성분
+        //String MATERIAL_NAME = getIntent().getStringExtra("material_name");//원료성분
 
 
     }

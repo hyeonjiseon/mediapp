@@ -18,7 +18,6 @@ public class BasicinfoActivity extends AppCompatActivity {
         String ITEM_PERMIT_DATE = getIntent().getStringExtra("item_permit_date");
         String ENTP_NO = getIntent().getStringExtra("ENTP_NO");
         String BAR_CODE = getIntent().getStringExtra("bar_code");
-
         String ITEM_SEQ = getIntent().getStringExtra("item_seq");
         String CHART = getIntent().getStringExtra("chart");
         String PACK_UNIT = getIntent().getStringExtra("PACK_UNIT");
