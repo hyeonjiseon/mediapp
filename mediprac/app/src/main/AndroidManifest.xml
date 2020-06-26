@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".BasicinfoActivity"></activity>
+        <activity android:name=".BasicinfoActivity" />
         <activity android:name=".SearchinfoActivity" />
         <activity android:name=".TextresultActivity" />
         <activity android:name=".SearchActivity" />

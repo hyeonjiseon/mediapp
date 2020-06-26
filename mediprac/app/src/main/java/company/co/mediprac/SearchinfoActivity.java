@@ -17,16 +17,13 @@ public class SearchinfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_searchinfo);
 
         String ITEM_NAME = getIntent().getStringExtra("item_name");
-        Log.e("ITEM_NAME", ITEM_NAME);
-
         TextView textView = (TextView)findViewById(R.id.item_name);
-
-
+        textView.setText(ITEM_NAME);
 
         Button button_search = findViewById(R.id.result_btn1);
-        button_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+                button_search.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
                 Intent intent_search = new Intent(getApplicationContext(), BasicinfoActivity.class);
 
                 intent_search.putExtra("item_name", getIntent().getStringExtra("item_name"));
@@ -49,24 +46,23 @@ public class SearchinfoActivity extends AppCompatActivity {
             }
         });
 
-
+        Button result_btn2 = findViewById(R.id.result_btn2);
+        button_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn2 = new Intent(getApplicationContext(), BasicinfoActivity.class);
+            }
+        });
 
 
 
         String MATERIAL_NAME = getIntent().getStringExtra("material_name");//원료성분
 
-        String BAR_CODE = getIntent().getStringExtra("bar_code");
-        Log.d("barcode", BAR_CODE);
-        String PERMIT_KIND_NAME = getIntent().getStringExtra("PERMIT_KIND_NAME");
-        Log.d("permit_kind_name", PERMIT_KIND_NAME);
 
         String EE_DOC_DATA = getIntent().getStringExtra("EE_DOC_DATA"); //효능효과
         Log.e("EE_DOC_DATA", EE_DOC_DATA);
 
-        String CANCEL_DATE = getIntent().getStringExtra("CANCEL_DATE");
-        Log.e("CANCEL_DATE", CANCEL_DATE);
 
-        textView.setText(EE_DOC_DATA);
 
     }
 }
