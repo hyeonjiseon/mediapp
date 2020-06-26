@@ -110,6 +110,14 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 String check = parser.getName();
                 Log.d("check", check);
 
+//                parser.nextTag();
+//                String tag5 = parser.getName();
+//                Log.d("tag5", tag5);
+//
+//                parser.nextTag();
+//                String tag6 = parser.getName();
+//                Log.d("tag6", tag6);
+
                 if(check.equals("PARAGRAPH")) {
                     String tag2 = parser.nextText();//paragraph 내용
                     Log.d("art para", tag2);
