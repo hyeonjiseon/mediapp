@@ -18,6 +18,16 @@
         <activity android:name=".SearchinfoActivity" />
         <activity android:name=".TextresultActivity" />
         <activity android:name=".SearchActivity" />
+        android:theme="@style/AppTheme">
+        <activity android:name=".CustomScannerActivity"></activity>
+        <activity
+            android:name=".AnyOrientationCaptureActivity"
+            android:screenOrientation="fullSensor"
+            android:stateNotNeeded="true"
+            android:theme="@style/zxing_CaptureTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity android:name=".BaresultActivity" />
+        <activity android:name=".SearchActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
