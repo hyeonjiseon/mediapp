@@ -22,6 +22,8 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     private ArrayList<Recent> filterList;
     private LayoutInflater mInflate;
     private Context mContext;
+
+
     SearchView searchView;
 
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
@@ -127,6 +129,10 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
          @Override
          protected FilterResults performFiltering(CharSequence constraint) {
+
+//             if(barcodeinfo != null){
+//                 constraint = barcodeinfo;
+//             }
 
              String charString = constraint.toString();
 
