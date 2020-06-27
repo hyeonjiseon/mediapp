@@ -24,7 +24,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     private Context mContext;
     SearchView searchView;
 
-
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
         this.filterList = items;
         this.mList = items;
@@ -128,7 +127,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
 
          @Override
          protected FilterResults performFiltering(CharSequence constraint) {
+
              String charString = constraint.toString();
+
              Log.e("CHAR String", charString);
              if (charString.isEmpty()) {
                  filterList = mList;
@@ -138,6 +139,9 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
                  for (Recent item : mList) {
                      if (item.getITEM_NAME().contains(charString.trim())) {//toLowerCase()., .toLowerCase()
                          filteringList.add(item);
+                     }
+                     if(item.getBAR_CODE().contains(charString.trim())){
+                             filteringList.add(item);
                      }
                  }
                  Log.e("FilteringlistLength", String.valueOf(filteringList.size()));

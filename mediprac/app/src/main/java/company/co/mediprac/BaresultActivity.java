@@ -4,9 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -36,9 +36,9 @@ public class BaresultActivity extends AppCompatActivity {
             Log.d("onActivityResult", "onActivityResult: ." + re);
 
             // 여기서 약 정보 리스트로 가게하기
-            //Intent tomedinfo  = new Intent(this, MedInfoActivity.class);
-            //tomedinfo.putExtra("PRDLST_STDR_CODE", re);
-            //startActivity(tomedinfo);
+            Intent barmedinfo  = new Intent(this, TextresultActivity.class);
+            barmedinfo.putExtra("BAR_CODE_info", re);
+            startActivity(barmedinfo);
             finish();
         }else {
             finish();

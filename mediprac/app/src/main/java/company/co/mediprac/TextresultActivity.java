@@ -30,8 +30,11 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     public String key="BZAkHyL1OvsaKk4INUgYd1ra39ts5cl%2BDojvvOH%2BQkW3FCIifva%2FTa5ZTKvrIt03W97NKmFMZH4Oq%2B6jIwy5bA%3D%3D";
     private RecyclerviewAdapter adapter;
     ArrayList<Recent> mList;
+
+    public String barcodeinfo;
     XmlPullParser xpp;
     String data;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         MyAsyncTask myAsyncTask = new MyAsyncTask();
         myAsyncTask.execute();
+
+
     }
 
     @Override
@@ -48,20 +53,30 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         MenuItem searchItem = menu.findItem(R.id.action_search);
         SearchView searchView = (SearchView) searchItem.getActionView();
         searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                adapter.getFilter().filter(query);
-                return false;
-            }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.e("NEWTEXT",newText);
-                adapter.getFilter().filter(newText);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+                @Override
+                public boolean onQueryTextSubmit (String query){
+                Log.e("query", query);
                 return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange (String newText){
+                    Log.e("NEWTEXT", newText);
+                    adapter.getFilter().filter(newText);
+
+                    if (getIntent().getStringExtra("BAR_CODE_info") != null){
+                        barcodeinfo = getIntent().getStringExtra("BAR_CODE_info");
+                        Log.e("barcodeinfo", barcodeinfo);
+                        adapter.getFilter().filter(barcodeinfo);
+                    }
+                    return false;
             }
         });
+
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -444,6 +459,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
             LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
             recyclerView.setLayoutManager(layoutManager);
+
+
         }
     }
 
