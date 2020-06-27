@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -36,7 +34,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     XmlPullParser xpp;
     String data;
     EditText editText;
-    Button gosearch_btn;
+   // Button gosearch_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,16 +52,16 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
         }
         editText.addTextChangedListener(this);
 
-        gosearch_btn = findViewById(R.id.gosearch_btn);
-        gosearch_btn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-
-
-
-            }
-        });
+//        gosearch_btn = findViewById(R.id.gosearch_btn);
+//        gosearch_btn.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//            }
+//        });
     }
 
 
