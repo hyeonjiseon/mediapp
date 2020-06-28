@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,9 +21,6 @@ public class RecyclerviewAdapter extends RecyclerView.Adapter<RecyclerviewAdapte
     private ArrayList<Recent> filterList;
     private LayoutInflater mInflate;
     private Context mContext;
-
-
-    SearchView searchView;
 
     public RecyclerviewAdapter(Context context, ArrayList<Recent> items) {
         this.filterList = items;

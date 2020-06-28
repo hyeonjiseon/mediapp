@@ -31,8 +31,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
     ArrayList<Recent> mList;
 
     public String barcodeinfo;
-    XmlPullParser xpp;
-    String data;
     EditText editText;
    // Button gosearch_btn;
 
@@ -69,13 +67,13 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        adapter.getFilter().filter(s);
+        //adapter.getFilter().filter(s);
+
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         adapter.getFilter().filter(s);
-
     }
 
     @Override
@@ -95,12 +93,6 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 //
 //                @Override
 //                public boolean onQueryTextSubmit (String query){
-////                    if (barcodeinfo != null) {
-////                        Log.e("barcodeinfoquery", barcodeinfo);
-////                        query = barcodeinfo;
-////                        Log.d("query", query);
-////                        adapter.getFilter().filter(query);
-////                    }
 //                    Log.d("query", query);
 //
 //                return false;
