@@ -60,18 +60,68 @@ public class SearchinfoActivity extends AppCompatActivity {
             }
         });
 
-//        Button result_btn3 = findViewById(R.id.result_btn3);
-//        result_btn3.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent_btn3 = new Intent(getApplicationContext(), CapinfoActivity.class);
-//                intent_btn3.putExtra("UD_DOC_DATA", getIntent().getStringExtra("UD_DOC_DATA"));
-//                startActivity(intent_btn3);
-//            }
-//        });
+        Button result_btn3 = findViewById(R.id.result_btn3);
+        result_btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn3 = new Intent(getApplicationContext(), CapinfoActivity.class);
+                intent_btn3.putExtra("UD_DOC_DATA", getIntent().getStringExtra("UD_DOC_DATA"));
+                startActivity(intent_btn3);
+            }
+        });
+
+        Button result_btn4 = findViewById(R.id.result_btn4);
+        result_btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn4 = new Intent(getApplicationContext(), CapinfoActivity.class);
+                intent_btn4.putExtra("NB_DOC_DATA", getIntent().getStringExtra("NB_DOC_DATA"));
+                startActivity(intent_btn4);
+            }
+        });
+
+        Button result_btn5 = findViewById(R.id.result_btn5);
+        result_btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn5 = new Intent(getApplicationContext(), EffectinfoActivity.class);
+                intent_btn5.putExtra("chart", getIntent().getStringExtra("chart"));
+                startActivity(intent_btn5);
+            }
+        });
+
+        Button result_btn6 = findViewById(R.id.result_btn6);
+        result_btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn6 = new Intent(getApplicationContext(), EffectinfoActivity.class);
+                intent_btn6.putExtra("STORAGE_METHOD", getIntent().getStringExtra("STORAGE_METHOD"));
+                startActivity(intent_btn6);
+            }
+        });
+
+        Button result_btn7 = findViewById(R.id.result_btn7);
+        result_btn7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn7 = new Intent(getApplicationContext(), EffectinfoActivity.class);
+                intent_btn7.putExtra("VALID_TERM", getIntent().getStringExtra("VALID_TERM"));
+                startActivity(intent_btn7);
+            }
+        });
+
+        Button result_btn8 = findViewById(R.id.result_btn8);
+        result_btn8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_btn8 = new Intent(getApplicationContext(), EffectinfoActivity.class);
+                intent_btn8.putExtra("material_name", getIntent().getStringExtra("material_name"));
+                startActivity(intent_btn8);
+            }
+        });
 
 
-        //String MATERIAL_NAME = getIntent().getStringExtra("material_name");//원료성분
+
 
 
     }

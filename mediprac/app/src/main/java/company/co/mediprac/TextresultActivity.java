@@ -354,7 +354,7 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
 
         @Override
         protected String doInBackground(String... strings) {
-            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1&numOfRows=10&"+"ServiceKey=" + key;
+            requestUrl = "http://apis.data.go.kr/1471057/MdcinPrductPrmisnInfoService/getMdcinPrductItem?"+"pageNo=1257&numOfRows=10&"+"ServiceKey=" + key;
             try {
                 boolean b_ITEM_NAME = false;
                 boolean b_ENTP_NAME = false;
@@ -372,6 +372,8 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                 boolean b_INDUTY_TYPE = false;
                 boolean b_CHANGE_DATE = false;
                 boolean b_INGR_NAME = false;
+                boolean b_STORAGE_METHOD = false;
+                boolean b_VALID_TERM = false;
 
                 URL url = new URL(requestUrl);
                 InputStream is = url.openStream();
@@ -415,7 +417,10 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             if (parser.getName().equals("CHANGE_DATE")) b_CHANGE_DATE = true;
                             if (parser.getName().equals("INGR_NAME")) b_INGR_NAME = true;
                             if (parser.getName().equals("EE_DOC_DATA")) bus.setEE_DOC_DATA(readLink(parser));
-                            //if (parser.getName().equals("UD_DOC_DATA")) bus.setUD_DOC_DATA(readLink(parser));
+                            if (parser.getName().equals("UD_DOC_DATA")) bus.setUD_DOC_DATA(readLink(parser));
+                            if (parser.getName().equals("NB_DOC_DATA")) bus.setNB_DOC_DATA(readLink(parser));
+                            if (parser.getName().equals("STORAGE_METHOD")) b_STORAGE_METHOD = true;
+                            if (parser.getName().equals("VALID_TERM")) b_VALID_TERM = true;
 
                             break;
 
@@ -468,6 +473,12 @@ public class TextresultActivity extends AppCompatActivity implements Recyclervie
                             } else if (b_INGR_NAME) {
                                 bus.setINGR_NAME(parser.getText());
                                 b_INGR_NAME = false;
+                            } else if (b_STORAGE_METHOD) {
+                                bus.setSTORAGE_METHOD(parser.getText());
+                                b_STORAGE_METHOD = false;
+                            } else if (b_VALID_TERM) {
+                                bus.setVALID_TERM(parser.getText());
+                                b_VALID_TERM= false;
                             }
                             break;
                     }

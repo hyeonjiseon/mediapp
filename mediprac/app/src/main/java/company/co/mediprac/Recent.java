@@ -9,7 +9,7 @@ public class Recent {
     String ENTP_NO;//업체허가번호1
     String BAR_CODE;//표준코드1
     String ITEM_SEQ;//품목기준코드1
-    String CHART;//성상, 제품모양1
+    String CHART;//성상, 제품모양1,4
     String MATERIAL_NAME;//원료성분8
     String PACK_UNIT;//포장단위1
     String PERMIT_KIND_NAME;//허가신고구분1
@@ -19,7 +19,10 @@ public class Recent {
     String CHANGE_DATE;//변경일자1
     String INGR_NAME;//첨가제1
     String EE_DOC_DATA;//효능효과2
-    //String UD_DOC_DATA;//용법용량3
+    String UD_DOC_DATA;//용법용량3
+    String NB_DOC_DATA;//주의사항4
+    String STORAGE_METHOD;//저장방법6
+    String VALID_TERM;//유효기간7
 
     public String getITEM_NAME() { return ITEM_NAME; }
     public String getENTP_NAME() { return ENTP_NAME; }
@@ -38,7 +41,10 @@ public class Recent {
     public String getCHANGE_DATE() { return CHANGE_DATE; }
     public String getINGR_NAME() { return INGR_NAME; }
     public String getEE_DOC_DATA() { return EE_DOC_DATA; }
-    //public String getUD_DOC_DATA() { return UD_DOC_DATA; }
+    public String getUD_DOC_DATA() { return UD_DOC_DATA; }
+    public String getNB_DOC_DATA() { return NB_DOC_DATA; }
+    public String getSTORAGE_METHOD() { return STORAGE_METHOD; }
+    public String getVALID_TERM() { return VALID_TERM; }
 
     public void setITEM_NAME(String ITEM_NAME) { this.ITEM_NAME = ITEM_NAME; }
     public void setENTP_NAME(String ENTP_NAME) { this.ENTP_NAME = ENTP_NAME; }
@@ -57,5 +63,8 @@ public class Recent {
     public void setCHANGE_DATE(String CHANGE_DATE) { this.CHANGE_DATE = CHANGE_DATE; }
     public void setINGR_NAME(String INGR_NAME) { this.INGR_NAME = INGR_NAME; }
     public void setEE_DOC_DATA(String EE_DOC_DATA) { this.EE_DOC_DATA = EE_DOC_DATA; }
-    //public void setUD_DOC_DATA(String UD_DOC_DATA) { this.UD_DOC_DATA = UD_DOC_DATA; }
+    public void setUD_DOC_DATA(String UD_DOC_DATA) { this.UD_DOC_DATA = UD_DOC_DATA; }
+    public void setNB_DOC_DATA(String NB_DOC_DATA) { this.NB_DOC_DATA = NB_DOC_DATA; }
+    public void setSTORAGE_METHOD(String STORAGE_METHOD) { this.STORAGE_METHOD = STORAGE_METHOD; }
+    public void setVALID_TERM(String VALID_TERM) { this.VALID_TERM = VALID_TERM; }
 }
